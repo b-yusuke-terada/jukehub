@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title JukeHub
+    script src='/assets/javascripts/application.bundle.js'
+    link rel='stylesheet' type='text/css' href='/assets/stylesheets/application.bundle.css'
+    = csrf_meta_tags
+    - if current_user
+      javascript:
+        $.ajaxSetup({headers: { 'Authorization': 'Bearer #{access_token}' } });
+  body
+    p = current_user
+    = yield

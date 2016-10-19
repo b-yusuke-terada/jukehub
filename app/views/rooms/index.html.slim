@@ -1,0 +1,5 @@
+h1 Rooms
+ul
+  - @rooms.each do |room|
+    li
+      = link_to room.screen_name, room

@@ -1,0 +1,149 @@
+div#main
+  h1 = @room.screen_name
+  iframe#video-viewer width="100%" height="400px" src="https://www.youtube.com/embed/ZWdMi2Cfp70" frameborder="0" allowfullscreen
+  h2 NOWPLAYING
+  div
+    p#now_playing_title
+    p#now_playing_user_name
+  h2 Video
+  input#url value="#{@q}" type='text' size='100%' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
+  button v-on:click="add" type="button" ↑
+  h2 VideoList
+  table
+    tbody
+      | <template v-for="queue in queues">
+      |   <tr>
+      |     <td v-if="queue.state == 0"><span class='tag tag-primary'>Queued</td>
+      |     <td v-if="queue.state == 1"><span class='tag tag-success'>NowPlaying</td>
+      |     <td v-if="queue.state == 2"><span class='tag tag-danger'>Finished</td>
+      |     <td><img v-bind:src='queue.image_url' height='32px' width='32px'></td>
+      |     <td>{{queue.title}}</td>
+      |     <td>{{queue.duration}}秒</td>
+      |     <td v-if="queue.state == 0"><button id="{{queue.id}}" class="btn btn-sm btn-danger" v-on:click="force_stop">Stop</button></td>
+      |     <td v-if="queue.state == 1"><button id="{{queue.id}}" class="btn btn-sm btn-danger" v-on:click="force_stop">Stop</button></td>
+      |   </tr>
+      | </template>
+  h2 Comment
+  input#comment value="#{@comment}" type='text' size='100%'
+  button v-on:click="comment" type="button" comment
+  h2 CommentList
+  table
+    tbody
+      | <template v-for="comment in comments">
+      |   <tr>
+      |     <td>{{comment.user_id}}</td>
+      |     <td>{{comment.body}}</td>
+      |   </tr>
+      | </template>
+
+javascript:
+  var v = new Vue({
+    el: '#main',
+    data: {
+      queues: [],
+      comments: [],
+      now_playing: 0,
+    },
+    methods: {
+      add: function (event) {
+        var self = this;
+        var url = $('#url').val();
+        $.ajax({
+          type: 'POST',
+          url: '/api/rooms/1/queues',
+          data: { url: url },
+          success: function() {
+            $('#url').val('');
+            self.fetch_videos();
+          }
+        });
+      },
+      fetch_videos: function() {
+        var self = this;
+        $.ajax({
+          type: 'GET',
+          url: '/api/rooms/1/queues',
+          success: function (data, status, request) {
+            self.queues = [];
+            for (var i = 0; i < data.length; i++) {
+              self.queues.push(data[i]);
+            }
+          },
+        }).error(function (data, status, request) {})
+      },
+      get_video: function(callback) {
+        $.ajax({
+          type: 'GET',
+          url: '/api/rooms/1/queues/playing',
+          success: function(res) {
+            if (res) {
+              $('#now_playing_title').text(res.video.title);
+              $('#now_playing_user').text(res.user.email);
+              callback(res.video.provider_video_id);
+            } else {
+              callback(false);
+            }
+          },
+        })
+      },
+      play: function(video_id) {
+        var url = 'https://www.youtube.com/embed/' + video_id;
+        $('#video-viewer').attr('src', url + '?autoplay=1');
+      },
+      force_stop: function(e, a, b) {
+        var self = this;
+        $.ajax({
+          type: 'DELETE',
+          url: '/api/rooms/1/queues/' + e.target.id,
+          success: function(res) {
+            self.fetch_videos();
+          }
+        });
+      },
+      watch: function() {
+        var self = this;
+        this.get_video(function(video_id) {
+          console.log(video_id)
+          if (video_id && (self.now_playing != video_id)) {
+            self.now_playing = video_id;
+            self.play(video_id);
+          }
+          self.fetch_videos();
+          self.fetch_comments();
+          setTimeout(function() {
+            self.watch();
+          }, 5 * 1000);
+        });
+      },
+      likes: function() {
+        console.log('likes');
+      },
+      comment: function() {
+        var self = this;
+        var comment = $('#comment').val();
+        $.ajax({
+          type: 'POST',
+          url: '/api/rooms/1/comments',
+          data: { comment: comment },
+          success: function() {
+            $('#comment').val('');
+            self.fetch_videos();
+          }
+        });
+      },
+      fetch_comments: function() {
+        var self = this;
+        $.ajax({
+          type: 'GET',
+          url: '/api/rooms/1/comments',
+          success: function (data, status, request) {
+            self.comments = [];
+            for (var i = 0; i < data.length; i++) {
+              self.comments.push(data[i]);
+            }
+          },
+        });
+      },
+    }
+  })
+  v.watch();
