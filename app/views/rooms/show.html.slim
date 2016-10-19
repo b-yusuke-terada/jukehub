@@ -1,5 +1,15 @@
+nav.navbar.navbar-dark.bg-primary
+  div.container-fluid
+    div.collapse.navbar-toggleable-xs
+      a.navbar-brand = @room.screen_name
+      form.form-inline.pull-xs-left
+        input.form-control type="text" size='50%' placeholder="Search"
+      ul.nav.navbar-nav.nav-flex-icons
+        li.nav-item.avatar.active.dropdown
+          img.img-circle src="#{current_user.accounts.first.image_url}" height='36px'
+
 div#main.container-fluid
-  h1 = @room.screen_name
+  br
   div.row
     div.col-xs-8
       iframe#video-viewer width="100%" height="400px" src="https://www.youtube.com/embed/ZWdMi2Cfp70" frameborder="0" allowfullscreen
@@ -26,11 +36,10 @@ div#main.container-fluid
             |   </tr>
             | </template>
     div.col-xs-4
-      h2 Video
-      div.row
-        div.col-xs-10.md-form
+      div.card.card-block
+        div.md-form
           input#url.form-control value="#{@q}" type='text' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
-        div.col-xs-1.md-form
+        div.md-form
           button.btn.btn-primary.btn-sm v-on:click="add" type="button" ↑
       div
         | <template v-for="queue in queues">
