@@ -1,40 +1,51 @@
-div#main
+div#main.container-fluid
   h1 = @room.screen_name
-  iframe#video-viewer width="100%" height="400px" src="https://www.youtube.com/embed/ZWdMi2Cfp70" frameborder="0" allowfullscreen
-  h2 NOWPLAYING
-  div
-    p#now_playing_title
-    p#now_playing_user_name
-  h2 Video
-  input#url value="#{@q}" type='text' size='100%' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
-  button v-on:click="add" type="button" ↑
-  h2 VideoList
-  table
-    tbody
-      | <template v-for="queue in queues">
-      |   <tr>
-      |     <td v-if="queue.state == 0"><span class='tag tag-primary'>Queued</td>
-      |     <td v-if="queue.state == 1"><span class='tag tag-success'>NowPlaying</td>
-      |     <td v-if="queue.state == 2"><span class='tag tag-danger'>Finished</td>
-      |     <td><img v-bind:src='queue.image_url' height='32px' width='32px'></td>
-      |     <td>{{queue.title}}</td>
-      |     <td>{{queue.duration}}秒</td>
-      |     <td v-if="queue.state == 0"><button id="{{queue.id}}" class="btn btn-sm btn-danger" v-on:click="force_stop">Stop</button></td>
-      |     <td v-if="queue.state == 1"><button id="{{queue.id}}" class="btn btn-sm btn-danger" v-on:click="force_stop">Stop</button></td>
-      |   </tr>
-      | </template>
-  h2 Comment
-  input#comment value="#{@comment}" type='text' size='100%'
-  button v-on:click="comment" type="button" comment
-  h2 CommentList
-  table
-    tbody
-      | <template v-for="comment in comments">
-      |   <tr>
-      |     <td>{{comment.user_id}}</td>
-      |     <td>{{comment.body}}</td>
-      |   </tr>
-      | </template>
+  div.row
+    div.col-xs-8
+      iframe#video-viewer width="100%" height="400px" src="https://www.youtube.com/embed/ZWdMi2Cfp70" frameborder="0" allowfullscreen
+      div.card.card-block
+        div.row
+          div.col-xs-2
+            img.img-circle.img-responsive src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg"
+          div.col-xs-8
+            h4#now_playing_title.card-title
+            p ここらへんにいいねとか
+      div.card.card-block
+        form.form-inline
+          div.md-form.form-group
+            input#comment value="#{@comment}" type='text' size='60%'
+          div.md-form.form-group
+            button v-on:click="comment" type="button" comment
+        hr
+        table
+          tbody
+            | <template v-for="comment in comments">
+            |   <tr>
+            |     <td>{{comment.user_id}}</td>
+            |     <td>{{comment.body}}</td>
+            |   </tr>
+            | </template>
+    div.col-xs-4
+      h2 Video
+      div.row
+        div.col-xs-10.md-form
+          input#url.form-control value="#{@q}" type='text' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
+        div.col-xs-1.md-form
+          button.btn.btn-primary.btn-sm v-on:click="add" type="button" ↑
+      div
+        | <template v-for="queue in queues">
+        |   <div class='card card-block'>
+        |     <div class='row'>
+        |       <div class='col-xs-2'>
+        |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
+        |       </div>
+        |       <div class='col-xs-10'>
+        |         <h5 class='card-title'>{{queue.title}}</h4>
+        |         <p class='pull-xs-right'>{{queue.duration}}秒</p>
+        |       </div>
+        |     </div>
+        |   </div>
+        | </template>
 
 javascript:
   var v = new Vue({
