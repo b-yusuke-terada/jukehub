@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: jukehub_production
-  username: jukehub
-  password: <%= ENV['JUKEHUB_DATABASE_PASSWORD'] %>
+  username: root
+  password:
+  socket: /tmp/mysql.sock
