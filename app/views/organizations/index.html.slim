@@ -6,4 +6,4 @@ table.table.table-bordered
   tbody
   - @organizations.each do |organization|
     tr
-      td = link_to organization.screen_name, "http://sekaie.dev-jukehub.net:3000/rooms"
+      td = link_to organization.screen_name, "http://#{organization.name}.#{ENV["APP_DOMAIN"]}/rooms"
