@@ -11,7 +11,7 @@ class ::Service::AddComment
   end
 
   def execute
-    now_playing = @room.queues.find_by({state: VideoQueue::STATE_PLAYING})
+    now_playing = @room.queues.find_by({state: RoomQueue::STATE_PLAYING})
     now_playing.comments << Comment.create({
       user_id: 1,
       body: @comment

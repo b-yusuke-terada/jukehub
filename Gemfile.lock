@@ -54,6 +54,10 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.0.2)
+    daemons (1.2.4)
+    daemons-rails (1.2.1)
+      daemons
+      multi_json (~> 1.0)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -274,6 +278,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  daemons-rails
   devise
   doorkeeper
   dotenv-rails

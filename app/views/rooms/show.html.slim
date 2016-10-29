@@ -6,7 +6,10 @@ nav.navbar.navbar-dark.bg-primary
         input.form-control type="text" size='50%' placeholder="Search"
       ul.nav.navbar-nav.nav-flex-icons
         li.nav-item.avatar.active.dropdown
-          img.img-circle src="#{current_user.accounts.first.image_url}" height='36px'
+          - if current_user.accounts.length > 0
+            img.img-circle src="#{current_user.accounts.first.image_url}" height='36px'
+          - else
+            i.fa.fa-user-circle height='36px'
 
 div#main.container-fluid
   br
@@ -19,13 +22,12 @@ div#main.container-fluid
             img.img-circle.img-responsive src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg"
           div.col-xs-8
             h4#now_playing_title.card-title
-            p ここらへんにいいねとか
+          div.col-xs-2
+            button.btn.btn-floating.btn-small.blue
+              i.fa.fa-gratipay
       div.card.card-block
-        form.form-inline
-          div.md-form.form-group
-            input#comment value="#{@comment}" type='text' size='60%'
-          div.md-form.form-group
-            button v-on:click="comment" type="button" comment
+        div.md-form.form-group
+          input#comment value="#{@comment}" type='text' v-on:keyup.enter="comment"
         hr
         table
           tbody
@@ -38,9 +40,7 @@ div#main.container-fluid
     div.col-xs-4
       div.card.card-block
         div.md-form
-          input#url.form-control value="#{@q}" type='text' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
-        div.md-form
-          button.btn.btn-primary.btn-sm v-on:click="add" type="button" ↑
+          input#url.form-control v-on:keyup.enter="add" value="#{@q}" type='text' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
       div
         | <template v-for="queue in queues">
         |   <div class='card card-block'>
@@ -123,7 +123,6 @@ javascript:
       watch: function() {
         var self = this;
         this.get_video(function(video_id) {
-          console.log(video_id)
           if (video_id && (self.now_playing != video_id)) {
             self.now_playing = video_id;
             self.play(video_id);
@@ -132,7 +131,7 @@ javascript:
           self.fetch_comments();
           setTimeout(function() {
             self.watch();
-          }, 5 * 1000);
+          }, 30 * 1000);
         });
       },
       likes: function() {
@@ -157,6 +156,7 @@ javascript:
           type: 'GET',
           url: '/api/rooms/1/comments',
           success: function (data, status, request) {
+            console.log(data);
             self.comments = [];
             for (var i = 0; i < data.length; i++) {
               self.comments.push(data[i]);

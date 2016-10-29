@@ -10,15 +10,15 @@ class ::Service::WatchQueue
   end
 
   def execute
-    now_playing = @room.now_playing_video
-    unless now_playing
-      puts "now playing がない"
-      first_queue = @room.queues.where({
-        state: VideoQueue::STATE_QUEUED
-      }).order(:created_at).first
-
-      if first_queue
-        first_queue.play
+    queue = @room.playing_queue
+    if !queue
+      if next_queue = @room.next_queue
+        next_queue.play
+      end
+    elsif queue.can_finish?
+      queue.finish
+      if next_queue = @room.next_queue
+        next_queue.play
       end
     end
   end

@@ -41,7 +41,6 @@ class API::Rooms < ::Grape::API
       resource :queues do
         desc 'GET /rooms/:id/queues'
         get do
-          puts 'koko'
           @room.videos
         end
 
@@ -51,11 +50,12 @@ class API::Rooms < ::Grape::API
 
           if params[:queue_id] == 'playing'
             room = ::Room.find(params[:id])
-            now_playing = room.queues.find_by({state: VideoQueue::STATE_PLAYING})
-            {
-              video: now_playing.video,
-              user: now_playing.user
-            }
+            now_playing = room.queues.find_by({state: RoomQueue::STATE_PLAYING})
+            if now_playing
+              { video: now_playing.video, user: now_playing.user }
+            else
+              false
+            end
           else
             room = Queue.find(params[:queue_id]) and return
           end

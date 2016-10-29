@@ -1,4 +1,4 @@
-class VideoQueue < ApplicationRecord
+class RoomQueue < ApplicationRecord
   belongs_to :user
   belongs_to :video
   belongs_to :room
@@ -16,6 +16,10 @@ class VideoQueue < ApplicationRecord
       started_at: DateTime.now,
       finish_at: (DateTime.now.to_time + video.duration).to_datetime
     })
+  end
+
+  def can_finish?
+    DateTime.now > finish_at
   end
 
   def finish

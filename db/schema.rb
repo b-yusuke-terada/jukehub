@@ -109,6 +109,27 @@ ActiveRecord::Schema.define(version: 20161016080752) do
     t.index ["user_id"], name: "index_reactions_on_user_id", using: :btree
   end
 
+  create_table "room_queues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "room_id"
+    t.integer  "video_id"
+    t.integer  "user_id"
+    t.integer  "state"
+    t.datetime "start_at"
+    t.datetime "started_at"
+    t.datetime "finish_at"
+    t.datetime "finished_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["finish_at"], name: "index_room_queues_on_finish_at", using: :btree
+    t.index ["finished_at"], name: "index_room_queues_on_finished_at", using: :btree
+    t.index ["room_id"], name: "index_room_queues_on_room_id", using: :btree
+    t.index ["start_at"], name: "index_room_queues_on_start_at", using: :btree
+    t.index ["started_at"], name: "index_room_queues_on_started_at", using: :btree
+    t.index ["state"], name: "index_room_queues_on_state", using: :btree
+    t.index ["user_id"], name: "index_room_queues_on_user_id", using: :btree
+    t.index ["video_id"], name: "index_room_queues_on_video_id", using: :btree
+  end
+
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "organization_id"
     t.string   "screen_name"
@@ -133,27 +154,6 @@ ActiveRecord::Schema.define(version: 20161016080752) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  end
-
-  create_table "video_queues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "room_id"
-    t.integer  "video_id"
-    t.integer  "user_id"
-    t.integer  "state"
-    t.datetime "start_at"
-    t.datetime "started_at"
-    t.datetime "finish_at"
-    t.datetime "finished_at"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["finish_at"], name: "index_video_queues_on_finish_at", using: :btree
-    t.index ["finished_at"], name: "index_video_queues_on_finished_at", using: :btree
-    t.index ["room_id"], name: "index_video_queues_on_room_id", using: :btree
-    t.index ["start_at"], name: "index_video_queues_on_start_at", using: :btree
-    t.index ["started_at"], name: "index_video_queues_on_started_at", using: :btree
-    t.index ["state"], name: "index_video_queues_on_state", using: :btree
-    t.index ["user_id"], name: "index_video_queues_on_user_id", using: :btree
-    t.index ["video_id"], name: "index_video_queues_on_video_id", using: :btree
   end
 
   create_table "videos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
