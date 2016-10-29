@@ -16,7 +16,21 @@ class User < ApplicationRecord
     false
   end
 
+  def belong_organization?(organization)
+    organizations.find_by({id: organization.id})
+  end
+
+  def generate_access_token
+    ::Doorkeeper::AccessToken.create({
+      application_id: nil,
+      resource_owner_id: id,
+      scopes: "public",
+      expires_in: nil,
+      use_refresh_token: false
+    }) unless ::Doorkeeper::AccessToken.find_by({resource_owner_id: id})
+  end
+
   def token
-    ::Doorkeeper::AccessToken.find_or_create_for(nil, id, nil, nil, false).token
+    ::Doorkeeper::AccessToken.find_by({resource_owner_id: id}).token
   end
 end

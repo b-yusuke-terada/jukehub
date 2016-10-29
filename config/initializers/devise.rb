@@ -14,4 +14,5 @@ Devise.setup do |config|
   config.sign_out_via = :delete
 
   config.omniauth :twitter, ENV["TWITTER_API_KEY"], ENV["TWITTER_API_SECRET"]
+  config.omniauth :google_oauth2, ENV["GOOGLE_APP_ID"], ENV["GOOGLE_APP_SECRET"], name: :google
 end
