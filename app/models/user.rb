@@ -16,6 +16,10 @@ class User < ApplicationRecord
     false
   end
 
+  def has_account?(provider)
+    accounts.find_by(provider: provider)
+  end
+
   def belong_organization?(organization)
     organizations.find_by({id: organization.id})
   end

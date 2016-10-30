@@ -27,7 +27,5 @@ module Jukehub
     config.autoload_paths.push(*%W(#{config.root}/app/apis))
     config.autoload_paths.push(*%W(#{config.root}/app/services))
     config.autoload_paths.push(*%W(#{config.root}/lib))
-
-    OmniAuth.config.full_host = "http://jukehub.com:3000"
   end
 end

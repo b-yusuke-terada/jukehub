@@ -6,10 +6,7 @@ nav.navbar.navbar-dark.bg-primary
         input.form-control type="text" size='50%' placeholder="Search"
       ul.nav.navbar-nav.nav-flex-icons
         li.nav-item.avatar.active.dropdown
-          - if current_user.accounts.length > 0
-            img.img-circle src="#{current_user.accounts.first.image_url}" height='36px'
-          - else
-            i.fa.fa-user-circle height='36px'
+          = link_to 'MyPage', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}"
 
 div#main.container-fluid
   br

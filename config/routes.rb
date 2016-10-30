@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :rooms, only: [:index, :show]
   resources :organizations, only: [:index, :show]
+  resources :users, only: [:show]
 
   mount API::Root => '/api'
 end
