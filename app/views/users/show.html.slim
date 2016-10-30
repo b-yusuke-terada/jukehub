@@ -1,0 +1,25 @@
+nav.navbar.navbar-dark.bg-primary
+  div.container-fluid
+    div.collapse.navbar-toggleable-xs
+      a.navbar-brand = @user.email
+      form.form-inline.pull-xs-left
+        input.form-control type="text" size='50%' placeholder="Search"
+      ul.nav.navbar-nav.nav-flex-icons
+        li.nav-item.avatar.active.dropdown
+          - if current_user.accounts.length > 0
+            img.img-circle src="#{current_user.accounts.first.image_url}" height='36px'
+          - else
+            i.fa.fa-user-circle height='36px'
+
+div#main.container-fluid
+  br
+  h2 Social Account
+  ul
+    - Account.providers.each do |provider|
+      li
+        a href="/users/auth/#{provider}"
+          i class="fa fa-#{provider}"
+        - if current_user.has_account?(provider)
+          p Connected
+        - else
+          p Not Connected
