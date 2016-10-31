@@ -1,3 +1,5 @@
+require 'gcp/youtube'
+
 class ::Service::WatchQueue
   attr_accessor :room
 
