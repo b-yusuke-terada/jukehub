@@ -38,7 +38,6 @@ module Gcp
     end
 
     def get_relation_video(id)
-      puts 'koko'
       res = @client.execute({
         api_method: @api.search.list,
         parameters: {

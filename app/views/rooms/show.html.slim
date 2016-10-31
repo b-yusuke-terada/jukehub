@@ -77,6 +77,9 @@ div#main.container-fluid
         | </template>
 
 javascript:
+  if (Notification.permission === 'default') {
+    Notification.requestPermission(function(result) {});
+  }
   var v = new Vue({
     el: '#main',
     data: {
@@ -119,7 +122,7 @@ javascript:
             if (res) {
               $('#now_playing_title').text(res.video.title);
               $('#now_playing_user').text(res.user.email);
-              callback(res.video.provider_video_id);
+              callback({ id: res.video.provider_video_id, title: res.video.title, user: res.user });
             } else {
               callback(false);
             }
@@ -142,10 +145,14 @@ javascript:
       },
       watch: function() {
         var self = this;
-        this.get_video(function(video_id) {
-          if (video_id && (self.now_playing != video_id)) {
-            self.now_playing = video_id;
-            self.play(video_id);
+        this.get_video(function(video) {
+          if (video && (self.now_playing != video.id)) {
+            self.now_playing = video.id;
+            self.play(video.id);
+            var n = new Notification(video.title + "\n" + video.user.email);
+            setTimeout(function() {
+              n.close();
+            }, 3 * 1000);
           }
           self.fetch_videos();
           self.fetch_comments();
