@@ -52,7 +52,18 @@ div#main.container-fluid
         |       </div>
         |     </div>
         |   </div>
-        |   <div class='card card-block card-success white-text' v-else>
+        |   <div class='card card-block card-success white-text' v-if="queue.state == 1">
+        |     <div class='row'>
+        |       <div class='col-xs-2'>
+        |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
+        |       </div>
+        |       <div class='col-xs-10'>
+        |         <h5 class='card-title'>{{queue.title}}</h4>
+        |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
+        |       </div>
+        |     </div>
+        |   </div>
+        |   <div class='card card-block card-danger white-text' v-if="queue.state == 2">
         |     <div class='row'>
         |       <div class='col-xs-2'>
         |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
