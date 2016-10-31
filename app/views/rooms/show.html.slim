@@ -106,7 +106,6 @@ javascript:
           success: function (data, status, request) {
             self.queues = [];
             for (var i = 0; i < data.length; i++) {
-              console.log(data[i]);
               self.queues.push(data[i]);
             }
           },
@@ -156,7 +155,6 @@ javascript:
         });
       },
       likes: function() {
-        console.log('likes');
       },
       comment: function() {
         var self = this;
@@ -177,7 +175,6 @@ javascript:
           type: 'GET',
           url: '/api/rooms/1/comments',
           success: function (data, status, request) {
-            console.log(data);
             self.comments = [];
             for (var i = 0; i < data.length; i++) {
               self.comments.push(data[i]);
