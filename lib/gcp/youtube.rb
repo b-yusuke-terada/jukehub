@@ -44,6 +44,7 @@ module Gcp
           part: 'snippet',
           type: 'video',
           relatedToVideoId: id,
+          maxResults: 50,
         }
       })
       JSON.parse(res.body)
