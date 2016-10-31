@@ -41,7 +41,16 @@ class API::Rooms < ::Grape::API
       resource :queues do
         desc 'GET /rooms/:id/queues'
         get do
-          @room.videos
+          queues = @room.current_queues
+          queues.map{|q| p q; {
+            image_url: q.video.image_url,
+            title: q.video.title,
+            state: q.state,
+            user: {
+              name: q.user.email,
+            },
+            duration: q.video.duration
+          }}.reverse
         end
 
         desc 'GET /rooms/:id/queues/:queue_id'
@@ -73,7 +82,7 @@ class API::Rooms < ::Grape::API
           v = uri.query.split('&').map{|m| m.split('=')}.select{|m| m[0] == 'v'}.first
           if v
             video_id = v[1]
-            res = Service::AddQueue.new({room: room, video_id: video_id}).execute
+            res = Service::AddQueue.new({room: room, video_id: video_id, user_id: current_user.id}).execute
           end
         end
 

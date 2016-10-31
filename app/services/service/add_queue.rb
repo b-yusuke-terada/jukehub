@@ -2,14 +2,16 @@ class ::Service::AddQueue
   attr_accessor :video_id
   attr_accessor :video_info
   attr_accessor :room
+  attr_accessor :user_id
 
   def initialize(**args)
     prepare(args)
   end
 
   def prepare(**args)
-    @room = args[:room] if args.key?(:room)
-    @video_id = args[:video_id] if args.key?(:video_id)
+    @room = args[:room]
+    @video_id = args[:video_id]
+    @user_id = args[:user_id]
   end
 
   def execute
@@ -24,6 +26,6 @@ class ::Service::AddQueue
       image_url: @video_info[:image_url]
     })
 
-    @room.add_queue(video)
+    @room.add_queue(@user_id, video)
   end
 end

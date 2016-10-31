@@ -19,6 +19,7 @@ div#main.container-fluid
             img.img-circle.img-responsive src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg"
           div.col-xs-8
             h4#now_playing_title.card-title
+            p#now_playing_user
           div.col-xs-2
             button.btn.btn-floating.btn-small.blue
               i.fa.fa-gratipay
@@ -40,14 +41,25 @@ div#main.container-fluid
           input#url.form-control v-on:keyup.enter="add" value="#{@q}" type='text' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
       div
         | <template v-for="queue in queues">
-        |   <div class='card card-block'>
+        |   <div class='card card-block' v-if="queue.state == 0">
         |     <div class='row'>
         |       <div class='col-xs-2'>
         |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
         |       </div>
         |       <div class='col-xs-10'>
         |         <h5 class='card-title'>{{queue.title}}</h4>
-        |         <p class='pull-xs-right'>{{queue.duration}}秒</p>
+        |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
+        |       </div>
+        |     </div>
+        |   </div>
+        |   <div class='card card-block card-success white-text' v-else>
+        |     <div class='row'>
+        |       <div class='col-xs-2'>
+        |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
+        |       </div>
+        |       <div class='col-xs-10'>
+        |         <h5 class='card-title'>{{queue.title}}</h4>
+        |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
         |       </div>
         |     </div>
         |   </div>
@@ -83,6 +95,7 @@ javascript:
           success: function (data, status, request) {
             self.queues = [];
             for (var i = 0; i < data.length; i++) {
+              console.log(data[i]);
               self.queues.push(data[i]);
             }
           },
