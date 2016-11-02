@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016080752) do
+ActiveRecord::Schema.define(version: 20161102104634) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20161016080752) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["provider", "uid"], name: "index_accounts_on_provider_and_uid", unique: true, using: :btree
+  end
+
+  create_table "comment_reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "comment_id"
+    t.integer  "user_id"
+    t.integer  "reaction_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["comment_id"], name: "index_comment_reactions_on_comment_id", using: :btree
+    t.index ["reaction_type"], name: "index_comment_reactions_on_reaction_type", using: :btree
+    t.index ["user_id"], name: "index_comment_reactions_on_user_id", using: :btree
   end
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -94,6 +105,17 @@ ActiveRecord::Schema.define(version: 20161016080752) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.index ["name"], name: "index_organizations_on_name", using: :btree
+  end
+
+  create_table "queue_reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "queue_id"
+    t.integer  "user_id"
+    t.integer  "reaction_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["queue_id"], name: "index_queue_reactions_on_queue_id", using: :btree
+    t.index ["reaction_type"], name: "index_queue_reactions_on_reaction_type", using: :btree
+    t.index ["user_id"], name: "index_queue_reactions_on_user_id", using: :btree
   end
 
   create_table "reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
