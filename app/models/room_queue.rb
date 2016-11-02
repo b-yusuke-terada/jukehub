@@ -4,6 +4,7 @@ class RoomQueue < ApplicationRecord
   belongs_to :room
 
   has_many :comments, foreign_key: 'queue_id'
+  has_many :reactions, foreign_key: 'queue_id', class_name: '::QueueReaction'
 
   STATE_QUEUED = 0
   STATE_PLAYING = 1

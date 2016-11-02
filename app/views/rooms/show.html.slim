@@ -21,7 +21,10 @@ div#main.container-fluid
             h4#now_playing_title.card-title
             p#now_playing_user
           div.col-xs-2
-            button.btn.btn-floating.btn-small.blue
+            span
+              span#like_count 0
+              span いいね
+            button.btn.btn-floating.btn-small.blue v-on:click="like"
               i.fa.fa-gratipay
       div.card.card-block
         div.md-form.form-group
@@ -133,6 +136,26 @@ javascript:
         var url = 'https://www.youtube.com/embed/' + video_id;
         $('#video-viewer').attr('src', url + '?autoplay=1');
       },
+      like: function() {
+        var self = this;
+        $.ajax({
+          type: 'POST',
+          url: '/api/rooms/1/reactions',
+          data: { type: 'like' },
+          success: function() {
+            self.fetch_reactions();
+          }
+        });
+      },
+      fetch_reactions: function() {
+        $.ajax({
+          type: 'GET',
+          url: '/api/rooms/1/reactions',
+          success: function(res) {
+            $('#like_count').text(res.like);
+          }
+        });
+      },
       force_stop: function(e, a, b) {
         var self = this;
         $.ajax({
@@ -145,6 +168,7 @@ javascript:
       },
       watch: function() {
         var self = this;
+        this.fetch_reactions();
         this.get_video(function(video) {
           if (video && (self.now_playing != video.id)) {
             self.now_playing = video.id;
@@ -160,8 +184,6 @@ javascript:
             self.watch();
           }, 30 * 1000);
         });
-      },
-      likes: function() {
       },
       comment: function() {
         var self = this;

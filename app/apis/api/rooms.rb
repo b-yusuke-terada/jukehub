@@ -36,6 +36,20 @@ class API::Rooms < ::Grape::API
       end
 
       resource :reactions do
+        desc 'GET /api/rooms/:id/reactions'
+        get do
+          p @room.playing_queue
+          p @room.playing_queue.reactions
+          { like: @room.playing_queue.reactions.length }
+        end
+
+        desc 'POST /api/rooms/:id/reactions'
+        params do
+          requires :type,  type: String
+        end
+        post do
+          ::Service::AddReaction.new({room: @room, user: current_user, type: params[:type]}).execute
+        end
       end
 
       resource :queues do
