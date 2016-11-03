@@ -1,0 +1,27 @@
+div#search_result.modal.fade tabindex="-1" role="dialog" aria-labelledby="youtube_modal" aria-hidden="true"
+  div.modal-dialog role="document"
+    div.modal-content
+      div.modal-header
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4#modal_title.modal-title
+          span 検索ワード: 
+          span#search_query_title
+      div.modal-body
+        | <template v-for="result in search_results">
+        |   <div class='card card-block'>
+        |     <div class='row'>
+        |       <div class='col-xs-2'>
+        |         <img v-bind:src='result.image_url' height='100%' width='100%'>
+        |       </div>
+        |       <div class='col-xs-8'>
+        |         <h5 class='card-title'>{{result.title}}</h4>
+        |       </div>
+        |       <div class='col-xs-2'>
+        |         <button id="{{result.video_id}}" class="btn btn-floating btn-small blue" v-on:click="add_video_from_result">
+        |           <i class="fa fa-plus-circle" id="{{result.video_id}}"></i>
+        |         </button>
+        |       </div>
+        |     </div>
+        |   </div>
+        | </template>

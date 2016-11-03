@@ -56,6 +56,7 @@ module Gcp
         parameters: {
           part: 'snippet',
           q: query,
+          type: 'video'
         }
       })
       JSON.parse(res.body)
