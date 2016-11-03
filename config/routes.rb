@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resources :rooms, only: [:index, :show]
-  resources :organizations, only: [:index, :show]
+  resources :organizations, only: [:index, :show] do
+    member do
+      get :join,   to: 'organizations#join'
+    end
+  end
   resources :users, only: [:show]
 
   mount API::Root => '/api'

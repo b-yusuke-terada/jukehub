@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102104634) do
+ActiveRecord::Schema.define(version: 20161103092706) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -102,9 +102,13 @@ ActiveRecord::Schema.define(version: 20161102104634) do
     t.string   "name"
     t.string   "screen_name"
     t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.boolean  "is_public",                 default: true
+    t.integer  "state",                     default: 0
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.index ["is_public"], name: "index_organizations_on_is_public", using: :btree
     t.index ["name"], name: "index_organizations_on_name", using: :btree
+    t.index ["state"], name: "index_organizations_on_state", using: :btree
   end
 
   create_table "queue_reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
