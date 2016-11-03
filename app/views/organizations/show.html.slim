@@ -1,0 +1,6 @@
+div#main.container-fluid
+  br
+  h1 = @organization.screen_name
+  div.text-xs-center
+    p 参加しますか
+    = link_to 'はい', join_organization_path, class: 'btn btn-primary'

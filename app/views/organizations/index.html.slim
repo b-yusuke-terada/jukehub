@@ -1,9 +1,24 @@
-h1 Organizations
-table.table.table-bordered
-  thead
-    tr
-      th 名前
-  tbody
-  - @organizations.each do |organization|
-    tr
-      td = link_to organization.screen_name, "http://#{organization.name}.#{ENV["APP_DOMAIN_WITH_PORT"]}/rooms"
+div#main.container-fluid
+  br
+  h1 グループ
+  div.row
+    div.col-xs-6
+      h2 公開中のグループ
+      table.table.table-bordered
+        thead
+          tr
+            th 名前
+        tbody
+        - @public_organizations.each do |organization|
+          tr
+            td = link_to organization.screen_name, "/organizations/#{organization.id}"
+    div.col-xs-6
+      h2 所属中のグループ
+      table.table.table-bordered
+        thead
+          tr
+            th 名前
+        tbody
+        - @belong_organizations.each do |organization|
+          tr
+            td = link_to organization.screen_name, "http://#{organization.name}.#{ENV["APP_DOMAIN_WITH_PORT"]}/rooms"

@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
   def index
-    if current_user
+    # organization subdomain のとき
+    if @organization
+      render '/organizations/show'
+    elsif current_user
       redirect_to organizations_path
     else
     end
