@@ -1,83 +1,85 @@
-nav.navbar.navbar-dark.bg-primary
-  div.container-fluid
-    div.collapse.navbar-toggleable-xs
-      a.navbar-brand = @room.screen_name
-      form.form-inline.pull-xs-left
-        input.form-control type="text" size='50%' placeholder="Search"
-      ul.nav.navbar-nav.nav-flex-icons
-        li.nav-item.avatar.active.dropdown
-          = link_to 'MyPage', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}"
+div#main
+  = render partial: "/rooms/youtube_search"
+  nav.navbar.navbar-dark.bg-primary
+    div.container-fluid
+      div.collapse.navbar-toggleable-xs
+        a.navbar-brand = @room.screen_name
+        div.form-inline.pull-xs-left
+          input#search_query.form-control v-on:keydown.enter="aho" type="text" size='50%' placeholder="Search"
+        ul.nav.navbar-nav.nav-flex-icons
+          li.nav-item.avatar.active.dropdown
+            = link_to 'MyPage', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}"
 
-div#main.container-fluid
-  br
-  div.row
-    div.col-xs-8
-      iframe#video-viewer width="100%" height="400px" src="https://www.youtube.com/embed/ZWdMi2Cfp70" frameborder="0" allowfullscreen
-      div.card.card-block
-        div.row
-          div.col-xs-2
-            img.img-circle.img-responsive src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg"
-          div.col-xs-8
-            h4#now_playing_title.card-title
-            p#now_playing_user
-          div.col-xs-2
-            span
-              span#like_count 0
-              span いいね
-            button.btn.btn-floating.btn-small.blue v-on:click="like"
-              i.fa.fa-gratipay
-      div.card.card-block
-        div.md-form.form-group
-          input#comment value="#{@comment}" type='text' v-on:keyup.enter="comment"
-        hr
-        table
-          tbody
-            | <template v-for="comment in comments">
-            |   <tr>
-            |     <td>{{comment.user_id}}</td>
-            |     <td>{{comment.body}}</td>
-            |   </tr>
-            | </template>
-    div.col-xs-4
-      div.card.card-block
-        div.md-form
-          input#url.form-control v-on:keyup.enter="add" value="#{@q}" type='text' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
-      div
-        | <template v-for="queue in queues">
-        |   <div class='card card-block' v-if="queue.state == 0">
-        |     <div class='row'>
-        |       <div class='col-xs-2'>
-        |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
-        |       </div>
-        |       <div class='col-xs-10'>
-        |         <h5 class='card-title'>{{queue.title}}</h4>
-        |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
-        |       </div>
-        |     </div>
-        |   </div>
-        |   <div class='card card-block card-success white-text' v-if="queue.state == 1">
-        |     <div class='row'>
-        |       <div class='col-xs-2'>
-        |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
-        |       </div>
-        |       <div class='col-xs-10'>
-        |         <h5 class='card-title'>{{queue.title}}</h4>
-        |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
-        |       </div>
-        |     </div>
-        |   </div>
-        |   <div class='card card-block card-danger white-text' v-if="queue.state == 2">
-        |     <div class='row'>
-        |       <div class='col-xs-2'>
-        |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
-        |       </div>
-        |       <div class='col-xs-10'>
-        |         <h5 class='card-title'>{{queue.title}}</h4>
-        |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
-        |       </div>
-        |     </div>
-        |   </div>
-        | </template>
+  div.container-fluid
+    br
+    div.row
+      div.col-xs-8
+        iframe#video-viewer width="100%" height="400px" src="https://www.youtube.com/embed/ZWdMi2Cfp70" frameborder="0" allowfullscreen
+        div.card.card-block
+          div.row
+            div.col-xs-2
+              img.img-circle.img-responsive src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg"
+            div.col-xs-8
+              h4#now_playing_title.card-title
+              p#now_playing_user
+            div.col-xs-2
+              span
+                span#like_count 0
+                span いいね
+              button.btn.btn-floating.btn-small.blue v-on:click="like"
+                i.fa.fa-gratipay
+        div.card.card-block
+          div.md-form.form-group
+            input#comment value="#{@comment}" type='text' v-on:keydown.enter="comment"
+          hr
+          table
+            tbody
+              | <template v-for="comment in comments">
+              |   <tr>
+              |     <td>{{comment.user_id}}</td>
+              |     <td>{{comment.body}}</td>
+              |   </tr>
+              | </template>
+      div.col-xs-4
+        div.card.card-block
+          div.md-form
+            input#url.form-control v-on:keydown.enter="add" value="#{@q}" type='text' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
+        div
+          | <template v-for="queue in queues">
+          |   <div class='card card-block' v-if="queue.state == 0">
+          |     <div class='row'>
+          |       <div class='col-xs-2'>
+          |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
+          |       </div>
+          |       <div class='col-xs-10'>
+          |         <h5 class='card-title'>{{queue.title}}</h4>
+          |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
+          |       </div>
+          |     </div>
+          |   </div>
+          |   <div class='card card-block card-success white-text' v-if="queue.state == 1">
+          |     <div class='row'>
+          |       <div class='col-xs-2'>
+          |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
+          |       </div>
+          |       <div class='col-xs-10'>
+          |         <h5 class='card-title'>{{queue.title}}</h4>
+          |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
+          |       </div>
+          |     </div>
+          |   </div>
+          |   <div class='card card-block card-danger white-text' v-if="queue.state == 2">
+          |     <div class='row'>
+          |       <div class='col-xs-2'>
+          |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
+          |       </div>
+          |       <div class='col-xs-10'>
+          |         <h5 class='card-title'>{{queue.title}}</h4>
+          |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
+          |       </div>
+          |     </div>
+          |   </div>
+          | </template>
 
 javascript:
   if (Notification.permission === 'default') {
@@ -86,6 +88,7 @@ javascript:
   var v = new Vue({
     el: '#main',
     data: {
+      search_results: [],
       queues: [],
       comments: [],
       now_playing: 0,
@@ -186,6 +189,7 @@ javascript:
         });
       },
       comment: function() {
+        console.log('test');
         var self = this;
         var comment = $('#comment').val();
         $.ajax({
@@ -194,7 +198,7 @@ javascript:
           data: { comment: comment },
           success: function() {
             $('#comment').val('');
-            self.fetch_videos();
+            self.fetch_comments();
           }
         });
       },
@@ -209,6 +213,36 @@ javascript:
               self.comments.push(data[i]);
             }
           },
+        });
+      },
+      aho: function() {
+        var self = this;
+        var query = $('#search_query').val();
+        $.ajax({
+          type: 'GET',
+          url: '/api/search',
+          data: { query: query },
+          success: function (data, status, request) {
+            self.search_results = [];
+            for (var i = 0; i < data.result.length; i++) {
+              self.search_results.push(data.result[i]);
+            }
+            $('#search_query_title').text(query);
+            $('#search_result').modal();
+          },
+        });
+      },
+      add_video_from_result: function (event) {
+        var self = this;
+        var url = "https://www.youtube.com/watch?v=" + event.target.id;
+        $.ajax({
+          type: 'POST',
+          url: '/api/rooms/1/queues',
+          data: { url: url },
+          success: function() {
+            self.fetch_videos();
+            $('#search_result').modal('hide');
+          }
         });
       },
     }

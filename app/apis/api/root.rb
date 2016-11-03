@@ -18,4 +18,5 @@ class API::Root < Grape::API
   mount API::Videos
   mount API::Rooms
   mount API::Users
+  mount API::Search
 end
