@@ -14,7 +14,7 @@ class Room < ApplicationRecord
 
   def add_queue(user_id, video)
     queues << RoomQueue.create({
-      user_id: 1,
+      user_id: user_id,
       video_id: video.id,
       state: RoomQueue::STATE_QUEUED,
     })

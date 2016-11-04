@@ -8,10 +8,16 @@ class API::Root < Grape::API
     def current_user
       User.find(doorkeeper_token.resource_owner_id)
     end
+
+    def jukehub_authorize!(*scopes)
+      unless scopes.select{|scope| doorkeeper_token.scopes.exists?(scope) }.length > 0
+        error!({ error: "missing scopes #{scopes.join(', ')}" }, 403)
+      end
+    end
   end
 
   before do
-    doorkeeper_authorize!
+    jukehub_authorize! :public
   end
 
   mount API::Organizations
