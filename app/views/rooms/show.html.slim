@@ -49,7 +49,8 @@ div#main
             tbody
               | <template v-for="comment in comments">
               |   <tr>
-              |     <td>{{comment.user_id}}</td>
+              |     <td>{{comment.user.email}}</td>
+              |     <td> : </td>
               |     <td>{{comment.body}}</td>
               |   </tr>
               | </template>
