@@ -1,12 +1,14 @@
 div#main
   = render partial: "/rooms/youtube_search"
   nav.navbar.navbar-dark.bg-primary
+    button.navbar-toggler.hidden-md-up type="button" data-toggle="collapse" data-target="#collapse-bar" aria-expanded="true"
+      i.fa.fa-bars
     div.container-fluid
-      div.collapse.navbar-toggleable-xs
+      div#collapse-bar.collapse.navbar-toggleable-md
         ul.nav.navbar-nav
           li.nav-item
             a.navbar-brand = @room.screen_name
-        div.form-inline.pull-xs-left
+        div.form-inline.pull-md-left
           input#search_query.form-control v-on:keydown.enter="aho" type="text" size='50%' placeholder="Search"
         ul.nav.navbar-nav.nav-flex-icons
           li.nav-item.avatar.dropdown.active
@@ -24,16 +26,16 @@ div#main
   div.container-fluid
     br
     div.row
-      div.col-xs-8
-        iframe#video-viewer width="100%" height="400px" src="https://www.youtube.com/embed/ZWdMi2Cfp70" frameborder="0" allowfullscreen
+      div.col-md-8
+        div#player
         div.card.card-block
           div.row
-            div.col-xs-2
+            div.col-md-2
               img.img-circle.img-responsive src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg"
-            div.col-xs-8
+            div.col-md-8
               h4#now_playing_title.card-title
               p#now_playing_user
-            div.col-xs-2
+            div.col-md-2
               span
                 span#like_count 0
                 span いいね
@@ -51,7 +53,7 @@ div#main
               |     <td>{{comment.body}}</td>
               |   </tr>
               | </template>
-      div.col-xs-4
+      div.col-md-4
         div.card.card-block
           div.md-form
             input#url.form-control v-on:keydown.enter="add" value="#{@q}" type='text' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
@@ -63,7 +65,7 @@ div#main
           |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
           |       </div>
           |       <div class='col-xs-10'>
-          |         <h5 class='card-title'>{{queue.title}}</h4>
+          |         <h5 class='card-title'>{{queue.title}}</h5>
           |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
           |       </div>
           |     </div>
@@ -74,7 +76,7 @@ div#main
           |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
           |       </div>
           |       <div class='col-xs-10'>
-          |         <h5 class='card-title'>{{queue.title}}</h4>
+          |         <h5 class='card-title'>{{queue.title}}</h5>
           |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
           |       </div>
           |     </div>
@@ -85,17 +87,32 @@ div#main
           |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
           |       </div>
           |       <div class='col-xs-10'>
-          |         <h5 class='card-title'>{{queue.title}}</h4>
+          |         <h5 class='card-title'>{{queue.title}}</h5>
           |         <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
           |       </div>
           |     </div>
           |   </div>
           | </template>
 
+
 javascript:
+  function onYouTubeIframeAPIReady() {
+    v.initialize_player();
+    v.watch();
+  }
+  function onPlayerReady(event) {
+    var player = event.target;
+    player.mute();
+    player.playVideo();
+    //event.target.playVideo();
+  }
+  function onPlayerStateChange(event) { }
+  function stopVideo() { }
+
   if (Notification.permission === 'default') {
     Notification.requestPermission(function(result) {});
   }
+
   var v = new Vue({
     el: '#main',
     data: {
@@ -103,9 +120,24 @@ javascript:
       queues: [],
       comments: [],
       now_playing: 0,
+      player: null,
     },
     methods: {
-      add: function (event) {
+      initialize_player: function(video_id = 'ZWdMi2Cfp70') {
+        if (this.player) {
+          this.player.destroy();
+        }
+        this.player = new YT.Player('player', {
+          height: '400px',
+          width: '100%',
+          videoId: video_id,
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      },
+      add: function(event) {
         var self = this;
         var url = $('#url').val();
         $.ajax({
@@ -147,8 +179,9 @@ javascript:
         })
       },
       play: function(video_id) {
-        var url = 'https://www.youtube.com/embed/' + video_id;
-        $('#video-viewer').attr('src', url + '?autoplay=1');
+        //var url = 'https://www.youtube.com/embed/' + video_id;
+        //$('#video-viewer').attr('src', url + '?autoplay=1');
+        this.initialize_player(video_id)
       },
       like: function() {
         var self = this;
@@ -258,4 +291,3 @@ javascript:
       },
     }
   })
-  v.watch();
