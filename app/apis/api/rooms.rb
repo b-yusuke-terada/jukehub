@@ -64,7 +64,7 @@ class API::Rooms < ::Grape::API
               name: q.user.email,
             },
             duration: q.video.duration
-          }}.reverse
+          }}
         end
 
         desc 'GET /rooms/:id/queues/:queue_id'
