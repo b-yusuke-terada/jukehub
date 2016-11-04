@@ -2,7 +2,7 @@ div#main.container-fluid
   br
   h1 グループ
   div.row
-    div.col-xs-6
+    div.col-md-6
       h2 公開中のグループ
       table.table.table-bordered
         thead
@@ -12,7 +12,7 @@ div#main.container-fluid
         - @public_organizations.each do |organization|
           tr
             td = link_to organization.screen_name, "/organizations/#{organization.id}"
-    div.col-xs-6
+    div.col-md-6
       h2 所属中のグループ
       table.table.table-bordered
         thead
