@@ -171,7 +171,7 @@ javascript:
           success: function(res) {
             if (res) {
               $('#now_playing_title').text(res.video.title);
-              $('#now_playing_user').text(res.user.email);
+              $('#now_playing_user').text(res.user_name);
               $('#user_image').attr("src", res.image_url);
               callback({ id: res.video.provider_video_id, title: res.video.title, user: res.user });
             } else {

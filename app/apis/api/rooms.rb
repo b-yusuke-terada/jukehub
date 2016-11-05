@@ -70,7 +70,7 @@ class API::Rooms < ::Grape::API
               title: q.video.title,
               state: q.state,
               user: {
-                name: q.user.email,
+                name: q.user.email.split('@').first,
               },
               duration: q.video.duration,
               duration_text: duration_text
@@ -86,7 +86,7 @@ class API::Rooms < ::Grape::API
             room = ::Room.find(params[:id])
             now_playing = room.queues.find_by({state: RoomQueue::STATE_PLAYING})
             if now_playing
-              { video: now_playing.video, image_url: now_playing.user.image_url, user: now_playing.user }
+              { video: now_playing.video, image_url: now_playing.user.image_url, user_name: now_playing.user.email.split('@').first, user: now_playing.user }
             else
               false
             end
