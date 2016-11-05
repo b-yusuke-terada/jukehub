@@ -75,7 +75,7 @@ div#main
           |               <a id="{{queue.id}}" class="activator" v-on:click="stop"><i id="{{queue.id}}" class="fa fa-stop-circle-o"></i></a>
           |             </div>
           |           </div>
-          |           <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
+          |           <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration_text}}</p>
           |         </div>
           |       </div>
           |     </div>
@@ -93,7 +93,7 @@ div#main
           |           <div class='col-md-1'>
           |             <a id="{{queue.id}}" class="activator" v-on:click="stop"><i id="{{queue.id}}" class="fa fa-stop-circle-o"></i></a>
           |           </div>
-          |           <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration}}秒</p>
+          |           <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration_text}}</p>
           |         </div>
           |       </div>
           |     </div>

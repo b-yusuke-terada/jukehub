@@ -54,16 +54,28 @@ class API::Rooms < ::Grape::API
         desc 'GET /rooms/:id/queues'
         get do
           queues = @room.current_queues
-          queues.map{|q| {
-            id: q.id,
-            image_url: q.video.image_url,
-            title: q.video.title,
-            state: q.state,
-            user: {
-              name: q.user.email,
-            },
-            duration: q.video.duration
-          }}
+          queues.map{|q|
+            duration_sec = q.video.duration
+            duration_text = ''
+            if duration_sec > 3600
+              duration_text = "#{duration_sec / 3600}時間#{(duration_sec % 3600) / 60}分#{duration_sec % 60}秒"
+            elsif duration_sec > 60
+              duration_text = "#{duration_sec / 60}分#{duration_sec % 60}秒"
+            else
+              duration_text = "#{duration_sec}秒"
+            end
+            {
+              id: q.id,
+              image_url: q.video.image_url,
+              title: q.video.title,
+              state: q.state,
+              user: {
+                name: q.user.email,
+              },
+              duration: q.video.duration,
+              duration_text: duration_text
+            }
+          }
         end
 
         desc 'GET /rooms/:id/queues/:queue_id'
