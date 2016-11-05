@@ -54,7 +54,8 @@ class API::Rooms < ::Grape::API
         desc 'GET /rooms/:id/queues'
         get do
           queues = @room.current_queues
-          queues.map{|q| p q; {
+          queues.map{|q| {
+            id: q.id,
             image_url: q.video.image_url,
             title: q.video.title,
             state: q.state,
@@ -100,7 +101,7 @@ class API::Rooms < ::Grape::API
 
         desc 'DELETE /rooms/:id/queues/:queue_id'
         delete ':queue_id' do
-          queue = ::Queue.find(params[:queue_id])
+          queue = ::RoomQueue.find(params[:queue_id])
           queue.finish
         end
       end

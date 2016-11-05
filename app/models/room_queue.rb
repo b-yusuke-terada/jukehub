@@ -26,4 +26,12 @@ class RoomQueue < ApplicationRecord
   def finish
     update({state: STATE_FINISHED, finished_at: DateTime.now})
   end
+
+  def stop
+    if state == STATE_PLAYING
+      finish
+    else
+      update({state: STATE_FINISHED})
+    end
+  end
 end
