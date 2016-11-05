@@ -25,10 +25,6 @@ class Room < ApplicationRecord
   end
 
   def current_queues
-    if latest_queue
-      queues.where("id >= #{latest_queue.id}")
-    else
-      queues.where("state IN (?)", [::RoomQueue::STATE_QUEUED, ::RoomQueue::STATE_PLAYING])
-    end
+    queues.where("state IN (?)", [::RoomQueue::STATE_QUEUED, ::RoomQueue::STATE_PLAYING]).order(:id)
   end
 end
