@@ -10,9 +10,7 @@ gulp.task('compile-sass', function() {
       .pipe(sass({ indentedSyntax: true, errLogToConsole: true }))
       .pipe(minifyCss())
       .pipe(rename({ suffix: '.bundle' }))
-      //.pipe(rev())
       .pipe(gulp.dest(config.stylesheet.dest))
-      //.pipe(rev.manifest(config.rev.dest, config.rev.opts))
       .pipe(gulp.dest(config.publicAssets));
 });
 
@@ -21,8 +19,11 @@ gulp.task('compile-scss', function() {
       .pipe(sass({ indentedSyntax: false, errLogToConsole: true }))
       .pipe(minifyCss())
       .pipe(rename({ suffix: '.bundle' }))
-      //.pipe(rev())
       .pipe(gulp.dest(config.stylesheet.dest))
-      //.pipe(rev.manifest(config.rev.dest, config.rev.opts))
       .pipe(gulp.dest(config.publicAssets));
+});
+
+gulp.task('compile-image', function() {
+  return gulp.src(config.image.src)
+      .pipe(gulp.dest(config.image.dest))
 });

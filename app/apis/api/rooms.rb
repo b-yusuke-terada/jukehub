@@ -86,7 +86,7 @@ class API::Rooms < ::Grape::API
             room = ::Room.find(params[:id])
             now_playing = room.queues.find_by({state: RoomQueue::STATE_PLAYING})
             if now_playing
-              { video: now_playing.video, user: now_playing.user }
+              { video: now_playing.video, image_url: now_playing.user.image_url, user: now_playing.user }
             else
               false
             end
