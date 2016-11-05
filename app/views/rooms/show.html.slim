@@ -1,13 +1,12 @@
 div#main
   = render partial: "/rooms/youtube_search"
   nav.navbar.navbar-dark.bg-primary
+    a.navbar-brand = @room.screen_name
     button.navbar-toggler.hidden-md-up type="button" data-toggle="collapse" data-target="#collapse-bar" aria-expanded="true"
       i.fa.fa-bars
     div.container-fluid
       div#collapse-bar.collapse.navbar-toggleable-md
         ul.nav.navbar-nav
-          li.nav-item
-            a.navbar-brand = @room.screen_name
         div.form-inline.pull-md-left
           input#search_query.form-control v-on:keydown.enter="aho" type="text" size='50%' placeholder="Search"
         ul.nav.navbar-nav.nav-flex-icons
@@ -63,29 +62,29 @@ div#main
           |   <div class='card' v-if="queue.state == 0">
           |     <div class='card-block'>
           |       <div class='row'>
-          |         <div class='col-xs-2'>
+          |         <div class='col-md-2'>
           |           <img v-bind:src='queue.image_url' height='100%' width='100%'>
           |         </div>
-          |         <div class='col-xs-10'>
+          |         <div class='col-md-10'>
           |           <div class='row'>
-          |             <div class='col-xs-11'>
+          |             <div class='col-md-11'>
           |               <h5 class='card-title'>{{queue.title}}</h5>
           |             </div>
-          |             <div class='col-xs-1'>
+          |             <div class='col-md-1'>
           |               <a id="{{queue.id}}" class="activator" v-on:click="stop"><i id="{{queue.id}}" class="fa fa-stop-circle-o"></i></a>
           |             </div>
           |           </div>
-          |           <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration_text}}</p>
+          |           <p class='pull-md-right'>{{queue.user.name}} / {{queue.duration_text}}</p>
           |         </div>
           |       </div>
           |     </div>
           |   </div>
           |   <div class='card card-block card-success white-text' v-if="queue.state == 1">
           |     <div class='row'>
-          |       <div class='col-xs-2'>
+          |       <div class='col-md-2'>
           |         <img v-bind:src='queue.image_url' height='100%' width='100%'>
           |       </div>
-          |       <div class='col-xs-10'>
+          |       <div class='col-md-10'>
           |         <div class="row">
           |           <div class='col-md-11'>
           |             <h5 class='card-title'>{{queue.title}}</h5>
@@ -93,7 +92,7 @@ div#main
           |           <div class='col-md-1'>
           |             <a id="{{queue.id}}" class="activator" v-on:click="stop"><i id="{{queue.id}}" class="fa fa-stop-circle-o"></i></a>
           |           </div>
-          |           <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration_text}}</p>
+          |           <p class='pull-md-right'>{{queue.user.name}} / {{queue.duration_text}}</p>
           |         </div>
           |       </div>
           |     </div>
