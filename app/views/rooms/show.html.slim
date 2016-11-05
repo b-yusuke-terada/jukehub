@@ -12,10 +12,7 @@ div#main
         ul.nav.navbar-nav.nav-flex-icons
           li.nav-item.avatar.dropdown.active
             a.nav-link.dropdown-toggle.waves-effect.waves-light type="button" id="dropdown_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
-              - if current_user.accounts.length > 0
-                img.img-circle src="#{current_user.accounts.first.image_url}" height='24px'
-              - else
-                i.fa.fa-user-circle height='36px'
+              img.img-circle src="#{current_user.image_url}" height='24px'
             div.dropdown-menu.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
               = link_to 'MyPage', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
               div.dropdown-divider
@@ -30,7 +27,7 @@ div#main
         div.card.card-block
           div.row
             div.col-xs-2
-              img.img-circle.img-responsive src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg"
+              img#user_image src="/assets/images/user.png" height="90%" width="90%"
             div.col-xs-8
               h4#now_playing_title.card-title
               p#now_playing_user
@@ -175,6 +172,7 @@ javascript:
             if (res) {
               $('#now_playing_title').text(res.video.title);
               $('#now_playing_user').text(res.user.email);
+              $('#user_image').attr("src", res.image_url);
               callback({ id: res.video.provider_video_id, title: res.video.title, user: res.user });
             } else {
               callback(false);

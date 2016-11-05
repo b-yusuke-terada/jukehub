@@ -16,6 +16,10 @@ class User < ApplicationRecord
     false
   end
 
+  def image_url
+    accounts.length > 0 ?  accounts.first.image_url : "/assets/images/user.png"
+  end
+
   def has_account?(provider)
     accounts.find_by(provider: provider)
   end

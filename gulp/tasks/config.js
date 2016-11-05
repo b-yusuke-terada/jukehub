@@ -18,10 +18,15 @@ module.exports = {
     srcScss:  gulpAssets   + '/stylesheets/**/*.scss',
     dest: publicAssets + '/stylesheets'
   },
+  image: {
+    src:  gulpAssets   + '/images/**/*',
+    dest: publicAssets + '/images'
+  },
   watch: {
     javascript:     gulpAssets + '/javascripts/**/*',
     stylesheetSass: gulpAssets + '/stylesheets/**/*.sass',
     stylesheetScss: gulpAssets + '/stylesheets/**/*.scss',
+    image:          gulpAssets + '/images/**/*',
     browserSync: 'public/**/*'
   },
   browserSync: {
