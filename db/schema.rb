@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103092706) do
+ActiveRecord::Schema.define(version: 20161106143407) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -133,6 +133,17 @@ ActiveRecord::Schema.define(version: 20161103092706) do
     t.index ["reaction_type"], name: "index_reactions_on_reaction_type", using: :btree
     t.index ["reference_comment_id"], name: "index_reactions_on_reference_comment_id", using: :btree
     t.index ["user_id"], name: "index_reactions_on_user_id", using: :btree
+  end
+
+  create_table "room_participants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_room_participants_on_created_at", using: :btree
+    t.index ["room_id"], name: "index_room_participants_on_room_id", using: :btree
+    t.index ["updated_at"], name: "index_room_participants_on_updated_at", using: :btree
+    t.index ["user_id"], name: "index_room_participants_on_user_id", using: :btree
   end
 
   create_table "room_queues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

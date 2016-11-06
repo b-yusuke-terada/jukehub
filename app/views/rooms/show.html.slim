@@ -24,6 +24,10 @@ div#main
     div.row
       div.col-md-8
         div#player
+        div#participants.card.card-block.nopad
+          | <template v-for="participant in participants">
+          |   <span><img src="{{participant.image_url}}" height="24px" width="24px"</img></span>
+          | </template>
         div.card.card-block
           div.row
             div.col-xs-2
@@ -120,6 +124,7 @@ javascript:
       search_results: [],
       queues: [],
       comments: [],
+      participants: [],
       now_playing: 0,
       player: null,
     },
@@ -157,6 +162,7 @@ javascript:
           type: 'GET',
           url: '/api/rooms/#{@room.id}/queues',
           success: function (data, status, request) {
+            console.log(data);
             self.queues = [];
             for (var i = 0; i < data.length; i++) {
               self.queues.push(data[i]);
@@ -205,6 +211,20 @@ javascript:
           }
         });
       },
+      fetch_participants: function() {
+        var self = this;
+        $.ajax({
+          type: 'GET',
+          url: '/api/rooms/#{@room.id}/participants',
+          success: function (data, status, request) {
+            self.participants = [];
+            for (var i = 0; i < data.length; i++) {
+              self.participants.push(data[i]);
+              console.log(self.participants);
+            }
+          }
+        });
+      },
       stop: function(e, a, b) {
         var self = this;
         $.ajax({
@@ -217,6 +237,7 @@ javascript:
       },
       watch: function() {
         var self = this;
+        self.fetch_participants();
         this.fetch_reactions();
         this.get_video(function(video) {
           if (video && (self.now_playing != video.id)) {

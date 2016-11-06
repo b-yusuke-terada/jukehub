@@ -1,5 +1,6 @@
 class Room < ApplicationRecord
   belongs_to :organization
+  has_many :participants, foreign_key: :room_id, class_name: 'RoomParticipant'
   has_many :queues, foreign_key: :room_id, class_name: 'RoomQueue'
   has_many :videos, through: :queues
   has_many :comments, through: :queues
