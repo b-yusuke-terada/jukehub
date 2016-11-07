@@ -26,7 +26,7 @@ div#main
         div#player
         div#participants.card.card-block.nopad
           | <template v-for="participant in participants">
-          |   <img src="{{participant.image_url}}" height="24px" width="24px"</img>
+          |   <img class="horizontal" src="{{participant.image_url}}" height="24px" width="24px"</img>
           | </template>
         div.card.card-block
           div.row
@@ -162,7 +162,6 @@ javascript:
           type: 'GET',
           url: '/api/rooms/#{@room.id}/queues',
           success: function (data, status, request) {
-            console.log(data);
             self.queues = [];
             for (var i = 0; i < data.length; i++) {
               self.queues.push(data[i]);
@@ -220,7 +219,6 @@ javascript:
             self.participants = [];
             for (var i = 0; i < data.length; i++) {
               self.participants.push(data[i]);
-              console.log(self.participants);
             }
           }
         });
