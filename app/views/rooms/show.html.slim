@@ -26,7 +26,7 @@ div#main
         div#player
         div#participants.card.card-block.nopad
           | <template v-for="participant in participants">
-          |   <img class="horizontal" src="{{participant.image_url}}" height="24px" width="24px"</img>
+          |   <img class="horizontal" v-bind:src='participant.image_url' height="24px" width="24px" data-toggle="tooltip" data-placement="top" title="{{participant.name}}">
           | </template>
         div.card.card-block
           div.row
