@@ -39,8 +39,7 @@ class API::Rooms < ::Grape::API
         desc 'GET /api/rooms/:id/participants'
         get do
           @room.participants.where('updated_at > ?', DateTime.now - 300).map{|m|
-            p m
-            { image_url: m.user.image_url }
+            { name: m.user.nickname, image_url: m.user.image_url }
           }
         end
       end

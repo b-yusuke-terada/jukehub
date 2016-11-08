@@ -16,6 +16,10 @@ class User < ApplicationRecord
     false
   end
 
+  def nickname
+    email.split('@').first
+  end
+
   def image_url
     accounts.length > 0 ?  accounts.first.image_url : "/assets/images/user.png"
   end
