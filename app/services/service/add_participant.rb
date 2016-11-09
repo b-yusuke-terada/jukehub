@@ -13,6 +13,6 @@ class ::Service::AddParticipant
 
   def execute
     room_participant = RoomParticipant.find_or_create_by({user_id: @user.id})
-    room_participant.update({room_id: @room.id})
+    room_participant.update({room_id: @room.id, updated_at: DateTime.now})
   end
 end

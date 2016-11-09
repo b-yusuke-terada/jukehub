@@ -38,6 +38,7 @@ class API::Rooms < ::Grape::API
       resource :participants do
         desc 'GET /api/rooms/:id/participants'
         get do
+          ::Service::AddParticipant.new({room: @room, user: current_user}).execute
           @room.participants.where('updated_at > ?', Time.now - 300).map{|m|
             { name: m.user.nickname, image_url: m.user.image_url }
           }
@@ -62,7 +63,6 @@ class API::Rooms < ::Grape::API
       resource :queues do
         desc 'GET /rooms/:id/queues'
         get do
-          ::Service::AddParticipant.new({room: @room, user: current_user}).execute
           queues = @room.current_queues
           queues.map{|q|
             duration_sec = q.video.duration
