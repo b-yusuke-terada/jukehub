@@ -22,3 +22,5 @@ div#main.container-fluid
         - @belong_organizations.each do |organization|
           tr
             td = link_to organization.screen_name, "http://#{organization.name}.#{ENV["APP_DOMAIN_WITH_PORT"]}/rooms"
+
+= render partial: "layouts/ga"
