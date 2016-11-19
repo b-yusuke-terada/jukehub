@@ -1,7 +1,16 @@
-h1 Rooms
-ul
-  - @rooms.each do |room|
-    li
-      = link_to room.screen_name, room
+div#main.container-fluid
+  br
+  h1 #{@organization.screen_name}の部屋一覧
+  table.table.table-bordered
+    thead
+      th 部屋名
+      th 参加者数
+      th 現在流れている音楽
+    tbody
+      - @rooms.each do |room|
+        tr
+          td = link_to room.screen_name, room
+          td.text-xs-right = "#{room.current_participants.length}人"
+          td = room.playing_queue.video.title
 
 = render partial: "layouts/ga"

@@ -8,19 +8,23 @@ div#main.container-fluid
         thead
           tr
             th 名前
+            th 部屋数
         tbody
         - @public_organizations.each do |organization|
           tr
             td = link_to organization.screen_name, "/organizations/#{organization.id}"
+            td.text-xs-right = organization.rooms.length
     div.col-md-6
       h2 所属中のグループ
       table.table.table-bordered
         thead
           tr
             th 名前
+            th 部屋数
         tbody
         - @belong_organizations.each do |organization|
           tr
             td = link_to organization.screen_name, "http://#{organization.name}.#{ENV["APP_DOMAIN_WITH_PORT"]}/rooms"
+            td.text-xs-right = organization.rooms.length
 
 = render partial: "layouts/ga"

@@ -28,4 +28,8 @@ class Room < ApplicationRecord
   def current_queues
     queues.where("state IN (?)", [::RoomQueue::STATE_QUEUED, ::RoomQueue::STATE_PLAYING]).order(:id)
   end
+
+  def current_participants
+    participants.where('updated_at > ?', Time.now - 300)
+  end
 end
