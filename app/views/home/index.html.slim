@@ -1,8 +1,63 @@
-br
-div.text-xs-center
-  h1.title Jukehub
-  div
-    = link_to 'ユーザ登録', new_user_registration_path, class: 'btn btn-primary'
-    = link_to 'ログイン', new_user_session_path, class: 'btn btn-success'
-
-= render partial: "layouts/ga"
+div#main
+  nav.navbar.bg-secondary
+    a.navbar-brand JukeHub
+    button.navbar-toggler.hidden-md-up type="button" data-toggle="collapse" data-target="#collapse-bar" aria-expanded="true"
+      i.fa.fa-bars
+    div.container-fluid
+      div#collapse-bar.collapse.navbar-toggleable-sm
+        ul.nav.navbar-nav
+        ul.nav.navbar-nav.nav-flex-icons
+          li.nav-item
+            = link_to 'ユーザ登録', new_user_registration_path, class: 'btn btn-sm btn-primary'
+          li.nav-item
+            = link_to 'ログイン', new_user_session_path, class: 'btn btn-sm btn-success'
+  div.contents.lp-view
+    div.lp-description
+      h1.display-4 JukeHub
+      div.row
+        div.col-lg-6
+          p JukeHubはYoutube動画を使ったDJサービスです
+        div.col-lg-6
+  br
+  br
+  div.container-fluid
+    div
+      div.flex-center
+        h2.display-5 JukeHubとは
+      div.flex-center
+        p JukeHubはYoutubeの動画をDJのセットリストとして流すことができるサービスです
+      br
+      div.flex-center
+        p DJとして自分で音楽を流すことはもちろん、リスナーとして音楽を聴くこともできます
+  br
+  br
+  div.flex-center
+    h2.display-5 ご利用までの流れ
+  div.container-fluid
+    br
+    div.row
+      div.col-lg-3
+        div.card.card-block.height250
+          h4.card-title 1. ユーザ登録
+          p.card-text
+            | まずはユーザの登録を行いましょう。
+            br
+            = link_to 'ユーザ登録はこちらから', new_user_registration_path
+      div.col-lg-3
+        div.card.card-block.height250
+          h4.card-title 2. グループへの参加
+          p.card-text
+            | DJグループに参加しましょう。
+            br
+            | まずはパブリックDJグループへの参加をおすすめします。
+      div.col-lg-3
+        div.card.card-block.height250
+          h4.card-title 3. 部屋への参加
+          p.card-text
+            | DJグループには複数の部屋が用意されています。
+            br
+            | 流れている音楽をみて好みの部屋に参加しましょう。
+      div.col-lg-3
+        div.card.card-block.height250
+          h4.card-title 4. 準備は整いました
+          p.card-text Have a good Jukehub time !!!
