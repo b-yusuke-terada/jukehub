@@ -2,7 +2,6 @@ class UsersController < BaseController
   before_action :set_user, only: [:show]
 
   def show
-    p @user
   end
 
   private

@@ -1,25 +1,66 @@
-nav.navbar.navbar-dark.bg-primary
-  div.container-fluid
-    div.collapse.navbar-toggleable-xs
-      a.navbar-brand = @user.email
-      form.form-inline.pull-xs-left
-        input.form-control type="text" size='50%' placeholder="Search"
-      ul.nav.navbar-nav.nav-flex-icons
-        li.nav-item.avatar.active.dropdown
-          - if current_user.accounts.length > 0
-            img.img-circle src="#{current_user.accounts.first.image_url}" height='36px'
-          - else
-            i.fa.fa-user-circle height='36px'
+div
+  nav.navbar.navbar-dark.bg-primary
+    a.navbar-brand JukeHub
+    button.navbar-toggler.hidden-md-up type="button" data-toggle="collapse" data-target="#collapse-bar" aria-expanded="true"
+      i.fa.fa-bars
+    div.container-fluid
+      div#collapse-bar.collapse.navbar-toggleable-sm
+        ul.nav.navbar-nav.nav-flex-icons
+          li.nav-item.avatar.dropdown.active
+            a.nav-link.dropdown-toggle.waves-effect.waves-light type="button" id="dropdown_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+              img.img-circle src="#{current_user.image_url}" height='24px'
+            div.dropdown-menu.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
+              = link_to 'MyPage', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
 
-div#main.container-fluid
   br
-  h2 Social Account
-  ul
-    - Account.providers.each do |provider|
-      li
-        a href="/users/auth/#{provider}"
-          i class="fa fa-#{provider}"
-        - if current_user.has_account?(provider)
-          p Connected
-        - else
-          p Not Connected
+  div.contents.container-fluid
+    div.row
+      div.col-lg-3
+        div.row
+          div.col-lg-12
+            img src="#{@user.image_url}" height="90%" width="90%"
+          div.col-lg-12
+            h2.display-5 = @user.nickname
+          div.col-lg-12
+            - @user.accounts.each do |account|
+              i class="fa fa-#{account.provider}"
+          div.col-lg-12
+            h5.display-6 organizations
+            ul
+             - @user.organizations.each do |organization|
+               li = organization.screen_name
+
+      div.col-lg-9
+        div.row
+          div.col-lg-6
+            h3 最近流した曲
+            - @user.queues.where(state: [1, 2]).order('id DESC').limit(5).each do |queue|
+              div.media
+                a.media-left.waves-light
+                  img.rounded-circle src="#{queue.video.image_url}"
+                div.media-body
+                  h6.media-heading = queue.video.title
+                  p
+                    | #{queue.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+                    br
+                    | #{queue.reactions.length} いいね
+          div.col-lg-6
+            h3 いいねをした曲
+            - @user.reactions.order('id DESC').limit(5).each do |reaction|
+              div.media
+                a.media-left.waves-light
+                  img.rounded-circle src="#{reaction.queue.video.image_url}"
+                div.media-body
+                  h6.media-heading = reaction.queue.video.title
+                  p = link_to reaction.queue.user.nickname, reaction.queue.user
+    br
+    h2 Social Account
+    ul
+      - Account.providers.each do |provider|
+        li
+          a href="/users/auth/#{provider}"
+            i class="fa fa-#{provider}"
+          - if current_user.has_account?(provider)
+            p Connected
+          - else
+            p Not Connected

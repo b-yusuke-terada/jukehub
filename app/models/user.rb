@@ -8,6 +8,11 @@ class User < ApplicationRecord
   has_many :organization_users
   has_many :organizations, through: :organization_users
 
+  has_many :queues, foreign_key: :user_id, class_name: 'RoomQueue'
+  has_many :videos, through: :queues
+
+  has_many :reactions, foreign_key: 'user_id', class_name: '::QueueReaction'
+
   def email_required?
     false
   end
