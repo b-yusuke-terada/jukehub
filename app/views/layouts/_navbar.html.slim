@@ -10,5 +10,5 @@ nav.navbar.navbar-dark.bg-primary
             img.img-circle src="#{current_user.image_url}" height='24px'
           div.dropdown-menu.dropdown-right.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
             = link_to 'マイページ', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
-            = link_to 'プロフィール編集', "#{ENV["APP_HOSTNAME"]}/settings/profile", class: 'dropdown-item'
+            = link_to 'プロフィール編集', "#{ENV["APP_HOSTNAME"]}/settings/account", class: 'dropdown-item'
 br
