@@ -22,7 +22,7 @@ class ::Service::WatchQueue
         res = ::Gcp::Youtube.new.get_relation_video(video_id)
         # random
         video_id = res["items"].sample["id"]["videoId"]
-        Service::AddQueue.new({room: @room, video_id: video_id, user_id: 1}).execute
+        Service::AddQueue.new({room: @room, video_id: video_id}).execute
       end
     elsif queue.can_finish?
       queue.finish

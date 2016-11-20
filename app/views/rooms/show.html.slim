@@ -145,9 +145,13 @@ javascript:
             if (res) {
               $('#now_playing_title').text(res.video.title);
               $('#now_playing_user').text('@' + res.user_name);
-              $('#now_playing_user').attr('href', '/users/' + res.user.id);
+              if (res.user) {
+                $('#now_playing_user').attr('href', '/users/' + res.user.id);
+              } else {
+                $('#now_playing_user').attr('href', '#');
+              }
               $('#user_image').attr("src", res.image_url);
-              callback({ id: res.video.provider_video_id, title: res.video.title, behind: res.behind, user: res.user });
+              callback({ id: res.video.provider_video_id, title: res.video.title, behind: res.behind, user_name: res.user_name, user: res.user });
             } else {
               callback(false);
             }
@@ -209,7 +213,7 @@ javascript:
           if (video && (self.now_playing != video.id)) {
             self.now_playing = video.id;
             self.play(video);
-            var n = new Notification(video.title + "\n" + video.user.email);
+            var n = new Notification(video.title + "\n" + video.user_name);
             setTimeout(function() {
               n.close();
             }, 3 * 1000);

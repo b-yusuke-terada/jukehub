@@ -43,4 +43,7 @@ div
                   img.rounded-circle src="#{reaction.queue.video.image_url}"
                 div.media-body
                   h6.media-heading = reaction.queue.video.title
-                  p = link_to reaction.queue.user.nickname, reaction.queue.user
+                  - if reaction.queue.user
+                    p = link_to reaction.queue.user.nickname, reaction.queue.user
+                  - else
+                    p = "JUKEHUB BOT"
