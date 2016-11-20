@@ -10,6 +10,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
   def callback_from(provider)
     user = Service::User::ConnectSocialAccount.new({user: current_user, auth: request.env['omniauth.auth']}).execute
-    sign_in_and_redirect user
+    redirect_to settings_account_path
   end
 end

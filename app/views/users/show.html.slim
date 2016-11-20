@@ -10,7 +10,11 @@ div
             h2 @#{@user.nickname}
           div.col-lg-12
             - @user.accounts.each do |account|
-              i class="fa fa-#{account.provider}"
+              - if account.provider_url
+                a href="#{account.provider_url}" target="_blank"
+                  i class="fa fa-#{account.provider}"
+              - else
+                i class="fa fa-#{account.provider}"
           div.col-lg-12
             h5.display-6 organizations
             ul

@@ -36,7 +36,8 @@ class Service::User::ConnectSocialAccount
     {
       provider: @auth["provider"],
       uid: @auth["uid"],
-      name: @auth["info"]["name"],
+      name: @auth["info"]["nickname"],
+      screen_name: @auth["info"]["name"],
       email: @auth["info"]["email"],
       image_url: @auth["info"]["image"],
     }
@@ -47,6 +48,7 @@ class Service::User::ConnectSocialAccount
       provider: @auth["provider"],
       uid: @auth["uid"],
       name: @auth["info"]["name"],
+      screen_name: nil,
       email: @auth["info"]["email"],
       image_url: @auth["info"]["image"]
     }
