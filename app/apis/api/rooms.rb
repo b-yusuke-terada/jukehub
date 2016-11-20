@@ -80,7 +80,7 @@ class API::Rooms < ::Grape::API
               title: q.video.title,
               state: q.state,
               user: {
-                name: q.user.nickname,
+                name: q.user ? q.user.nickname : 'JUKEHUB BOT',
               },
               duration: q.video.duration,
               duration_text: duration_text
@@ -95,8 +95,16 @@ class API::Rooms < ::Grape::API
           if params[:queue_id] == 'playing'
             room = ::Room.find(params[:id])
             now_playing = room.queues.find_by({state: RoomQueue::STATE_PLAYING})
-            if now_playing
+            if now_playing && now_playing.user
               { video: now_playing.video, behind: (DateTime.now.to_time - now_playing.started_at.to_time).to_i, image_url: now_playing.user.image_url, user_name: now_playing.user.nickname, user: now_playing.user }
+            elsif now_playing
+              {
+                video: now_playing.video,
+                behind: (DateTime.now.to_time - now_playing.started_at.to_time).to_i,
+                image_url: "/assets/images/user.png",
+                user_name: "JUKEHUB BOT",
+                user: nil,
+              }
             else
               false
             end
