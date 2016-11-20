@@ -1,0 +1,14 @@
+div
+  = render partial: "/layouts/navbar"
+  div.contents.container-fluid
+    div.row
+      div.col-lg-3
+        = render partial: "/settings/menu"
+      div.col-lg-9
+        div.card
+          h5.card-header プロフィール
+          div.card-block
+            p 現在プロフィール機能は実装中です。もうしばらくお待ち下さい。
+
+javascript:
+  $('#menu_profile').addClass('active');

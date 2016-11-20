@@ -13,8 +13,8 @@ div#main
           li.nav-item.avatar.dropdown.active
             a.nav-link.dropdown-toggle.waves-effect.waves-light type="button" id="dropdown_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
               img.img-circle src="#{current_user.image_url}" height='24px'
-            div.dropdown-menu.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
-              = link_to 'MyPage', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
+            div.dropdown-menu.dropdown-right.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
+              = link_to 'マイページ', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
               div.dropdown-divider
               = link_to '所属切替', "#{ENV["APP_HOSTNAME"]}/organizations", class: 'dropdown-item'
 
@@ -34,7 +34,7 @@ div#main
               img#user_image src="/assets/images/user.png" height="90%" width="90%"
             div.col-xs-8
               h4#now_playing_title.card-title
-              p#now_playing_user
+              a#now_playing_user
             div.col-xs-2
               span
                 span#like_count 0
@@ -144,7 +144,8 @@ javascript:
           success: function(res) {
             if (res) {
               $('#now_playing_title').text(res.video.title);
-              $('#now_playing_user').text(res.user_name);
+              $('#now_playing_user').text('@' + res.user_name);
+              $('#now_playing_user').attr('href', '/users/' + res.user.id);
               $('#user_image').attr("src", res.image_url);
               callback({ id: res.video.provider_video_id, title: res.video.title, behind: res.behind, user: res.user });
             } else {

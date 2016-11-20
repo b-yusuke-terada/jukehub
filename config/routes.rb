@@ -17,5 +17,12 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:show]
 
+  namespace :settings do
+    get '/profile'  => 'profile#show'
+    put '/profile'  => 'profile#update'
+    get '/account'  => 'account#show'
+    patch '/account'  => 'account#update'
+  end
+
   mount API::Root => '/api'
 end

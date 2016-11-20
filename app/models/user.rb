@@ -22,7 +22,7 @@ class User < ApplicationRecord
   end
 
   def nickname
-    email.split('@').first
+    name ? name : email.split('@').first
   end
 
   def image_url

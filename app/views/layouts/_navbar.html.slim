@@ -1,0 +1,14 @@
+nav.navbar.navbar-dark.bg-primary
+  a.navbar-brand href="#{ENV["APP_HOSTNAME"]}" JukeHub
+  button.navbar-toggler.hidden-md-up type="button" data-toggle="collapse" data-target="#collapse-bar" aria-expanded="true"
+    i.fa.fa-bars
+  div.container-fluid
+    div#collapse-bar.collapse.navbar-toggleable-sm
+      ul.nav.navbar-nav.nav-flex-icons
+        li.nav-item.avatar.dropdown.active
+          a.nav-link.dropdown-toggle.waves-effect.waves-light type="button" id="dropdown_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+            img.img-circle src="#{current_user.image_url}" height='24px'
+          div.dropdown-menu.dropdown-right.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
+            = link_to 'マイページ', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
+            = link_to 'プロフィール編集', "#{ENV["APP_HOSTNAME"]}/settings/profile", class: 'dropdown-item'
+br
