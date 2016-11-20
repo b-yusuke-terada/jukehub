@@ -1,18 +1,5 @@
 div
-  nav.navbar.navbar-dark.bg-primary
-    a.navbar-brand JukeHub
-    button.navbar-toggler.hidden-md-up type="button" data-toggle="collapse" data-target="#collapse-bar" aria-expanded="true"
-      i.fa.fa-bars
-    div.container-fluid
-      div#collapse-bar.collapse.navbar-toggleable-sm
-        ul.nav.navbar-nav.nav-flex-icons
-          li.nav-item.avatar.dropdown.active
-            a.nav-link.dropdown-toggle.waves-effect.waves-light type="button" id="dropdown_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
-              img.img-circle src="#{current_user.image_url}" height='24px'
-            div.dropdown-menu.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
-              = link_to 'MyPage', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
-
-  br
+  = render partial: "/layouts/navbar"
   div.contents.container-fluid
     div.row
       div.col-lg-3
@@ -20,7 +7,7 @@ div
           div.col-lg-12
             img src="#{@user.image_url}" height="90%" width="90%"
           div.col-lg-12
-            h2.display-5 = @user.nickname
+            h2 @#{@user.nickname}
           div.col-lg-12
             - @user.accounts.each do |account|
               i class="fa fa-#{account.provider}"
@@ -45,7 +32,7 @@ div
                     br
                     | #{queue.reactions.length} いいね
           div.col-lg-6
-            h3 いいねをした曲
+            h3 最近いいねをした曲
             - @user.reactions.order('id DESC').limit(5).each do |reaction|
               div.media
                 a.media-left.waves-light
@@ -53,14 +40,3 @@ div
                 div.media-body
                   h6.media-heading = reaction.queue.video.title
                   p = link_to reaction.queue.user.nickname, reaction.queue.user
-    br
-    h2 Social Account
-    ul
-      - Account.providers.each do |provider|
-        li
-          a href="/users/auth/#{provider}"
-            i class="fa fa-#{provider}"
-          - if current_user.has_account?(provider)
-            p Connected
-          - else
-            p Not Connected

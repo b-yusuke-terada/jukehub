@@ -1,0 +1,38 @@
+div
+  = render partial: "/layouts/navbar"
+  div.contents.container-fluid
+    div.row
+      div.col-lg-3
+        = render partial: "/settings/menu"
+      div.col-lg-9
+        div.card
+          h5.card-header 外部サービス
+          div.card-block
+            p SNSアカウントと接続することで、SNSアカウントログインが可能になります。
+            ul
+              - Account.providers.each do |provider|
+                li
+                  - if current_user.has_account?(provider)
+                    a.btn.btn-default
+                      i class="fa fa-#{provider}"
+                      |  #{provider} と接続中です
+                  - else
+                    a.btn.btn-secondary href="/users/auth/#{provider}"
+                      i class="fa fa-#{provider}"
+                      |  #{provider} と接続します
+        div.card
+          h5.card-header ユーザ名
+          div.card-block
+            p ユーザ名はDJ時に表示される名前です。
+            - if flash[:success]
+              span.small = flash[:success]
+            - if flash[:error]
+              span.small = flash[:error]
+            = form_for @user, url: '/settings/account' do |f|
+              div.md-form.input-group
+                span.input-group-addon @
+                = f.text_field :name, class: 'form-control'
+              = f.submit '保存する', class: 'btn btn-default'
+
+javascript:
+  $('#menu_account').addClass('active');
