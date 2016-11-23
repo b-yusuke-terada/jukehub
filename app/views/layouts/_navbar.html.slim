@@ -11,4 +11,6 @@ nav.navbar.navbar-dark.bg-primary
           div.dropdown-menu.dropdown-right.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
             = link_to 'マイページ', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
             = link_to 'プロフィール編集', "#{ENV["APP_HOSTNAME"]}/settings/account", class: 'dropdown-item'
+            div.dropdown-divider
+            = link_to 'JukeHubの使い方', "#{ENV["APP_HOSTNAME"]}/how_to_use", class: 'dropdown-item', target: '_blank'
 br

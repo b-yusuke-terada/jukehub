@@ -9,6 +9,8 @@ div#main
     div.container-fluid
       div#collapse-bar.collapse.navbar-toggleable-sm
         ul.nav.navbar-nav
+          li.nav-item
+            = link_to '使い方', how_to_use_path, class: 'nav-link'
         ul.nav.navbar-nav.nav-flex-icons
           li.nav-item
             = link_to 'ユーザ登録', new_user_registration_path, class: 'btn btn-sm btn-primary'

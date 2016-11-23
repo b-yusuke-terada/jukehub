@@ -8,4 +8,7 @@ class HomeController < ApplicationController
     else
     end
   end
+
+  def how_to_use
+  end
 end
