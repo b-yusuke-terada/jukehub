@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   }
 
   get 'home/index'
+  get 'how_to_use' => 'home#how_to_use'
 
   root to: "home#index"
 

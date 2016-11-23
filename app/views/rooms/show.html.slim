@@ -16,6 +16,7 @@ div#main
             div.dropdown-menu.dropdown-right.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
               = link_to 'マイページ', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
               div.dropdown-divider
+              = link_to 'JukeHubの使い方', "#{ENV["APP_HOSTNAME"]}/how_to_use", class: 'dropdown-item', target: '_blank'
               = link_to '所属切替', "#{ENV["APP_HOSTNAME"]}/organizations", class: 'dropdown-item'
 
 
