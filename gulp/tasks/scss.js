@@ -18,18 +18,13 @@ gulp.task('compile-sass', function() {
       .pipe(gulp.dest(config.publicAssets));
 });
 
-gulp.task('compile-scss', function() {
-  return gulp.src(config.stylesheet.srcScss)
-      .pipe(plumber())
-      .pipe(sass({ indentedSyntax: false, errLogToConsole: true }))
-      .pipe(autoprefixer())
-      .pipe(minifyCss())
-      .pipe(rename({ suffix: '.bundle' }))
-      .pipe(gulp.dest(config.stylesheet.dest))
-      .pipe(gulp.dest(config.publicAssets));
-});
-
 gulp.task('compile-image', function() {
   return gulp.src(config.image.src)
       .pipe(gulp.dest(config.image.dest))
+});
+
+// watch
+gulp.task('watch-sass', function() {
+    var watcher = gulp.watch('app/assets/**/*.scss', ['compile-sass']);
+    watcher.on('change', function(event) {});
 });
