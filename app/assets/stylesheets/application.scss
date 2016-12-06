@@ -75,8 +75,12 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
 
 //show
 body {
+  color: #FFF !important;
   background: #000;
   animation: bg-color 10s infinite;  
+}
+.contents a {
+  color: #FFD700 !important;
 }
 .show {
   .navbar div input {
@@ -102,6 +106,9 @@ body {
     color: #111 !important;
   }
   .card-block {
+    a {
+      color: #FFF !important;
+    }
     h5.urlTitle ,.form-control,.md-form {
       margin-bottom: 0;
     }
@@ -188,6 +195,23 @@ body {
       -webkit-mask-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 20%, rgba(0,0,0,0.2) 36%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.2) 44%, rgba(0,0,0,0) 60%, rgba(0,0,0,0));
     }
   }
+  .card-block {
+    color: #111 !important;
+    .fa-stop-circle-o {
+      color: #111 !important;
+    }
+  }
+  .card-success {
+    color: #FFF !important;
+    .fa-stop-circle-o {
+      color: #FFF !important;
+    }
+  }
+  .list-group-item,.btn-secondary {
+    color: #111 !important;
+  }
+  
+
 }
 
   
