@@ -56,6 +56,7 @@ module Gcp
         parameters: {
           part: 'snippet',
           q: query,
+          maxResults: 50,
           type: 'video'
         }
       })
