@@ -42,24 +42,11 @@ div#main.show
               h4#now_playing_title.card-title
               a#now_playing_user
             div.col-xs-2
-              span
+              span.likeCountArea
                 span#like_count 0
                 span いいね
               button.btn.btn-floating.btn-small.gold v-on:click="like"
                 i.fa.fa-gratipay
-        div.card.card-block
-          div.md-form.form-group
-            input#comment value="#{@comment}" type='text' v-on:keydown.enter="comment" placeholder="コメント"
-          hr
-          table
-            tbody
-              | <template v-for="comment in comments">
-              |   <tr>
-              |     <td>{{comment.user.email}}</td>
-              |     <td> : </td>
-              |     <td>{{comment.body}}</td>
-              |   </tr>
-              | </template>
       div.col-md-4
         div.card.card-block
           h5.urlTitle URL検索（YouTubeのみ）
