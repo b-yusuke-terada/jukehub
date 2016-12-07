@@ -1,5 +1,6 @@
 div#main.show
   = render partial: "/rooms/youtube_search"
+  = render partial: "/rooms/error_modal"
   nav.navbar.navbar-dark.bg-primary
     span.bb
     a.navbar-brand = @room.screen_name
@@ -115,7 +116,10 @@ javascript:
           success: function() {
             $('#url').val('');
             self.fetch_videos();
-          }
+          },
+          error: function(res, a) {
+            $('#error_modal').modal('show');
+          },
         });
       },
       fetch_videos: function() {
@@ -272,7 +276,10 @@ javascript:
           success: function() {
             self.fetch_videos();
             $('#search_result').modal('hide');
-          }
+          },
+          error: function() {
+            $('#error_modal').modal('show');
+          },
         });
       },
     }

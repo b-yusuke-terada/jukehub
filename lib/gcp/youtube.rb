@@ -30,7 +30,7 @@ module Gcp
       res = @client.execute({
         api_method: @api.videos.list,
         parameters: {
-          part: 'id,snippet,contentDetails',
+          part: 'id,snippet,contentDetails,status',
           id: video_id,
         }
       })

@@ -26,6 +26,8 @@ class ::Service::AddQueue
       image_url: @video_info[:image_url]
     })
 
+    raise StandardError.new('この動画は再生できません') unless @video_info[:embeddable]
+
     @room.add_queue(@user_id, video)
   end
 end
