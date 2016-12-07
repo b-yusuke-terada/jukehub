@@ -5,7 +5,7 @@ var runSequence = require('run-sequence');
 gulp.task('default', function() {
   runSequence(
     'clean',
-    ['compile-sass', 'compile-image'],
+    ['compile-scss', 'compile-image'],
     'webpack'
   );
 });

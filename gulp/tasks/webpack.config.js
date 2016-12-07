@@ -22,7 +22,7 @@ module.exports = {
       { test: /\.vue$/,       loader: 'vue' },
       { test: /\.png$/,       loader: 'url?limit=8192' },
       { test: /\.css$/,       loader: "style!css" },
-      { test: /\.sass$/,      loaders: ["style", "css", "sass"] },
+      { test: /\.scss$/,      loaders: ["style", "css", "scss"] },
       { test: /\.(otf|eot|svg|ttf|woff|woff2)(\?.+)?$/, loader: 'url' }
     ]
   }

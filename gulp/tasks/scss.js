@@ -7,10 +7,10 @@ var minifyCss = require('gulp-minify-css');
 var autoprefixer = require("gulp-autoprefixer");
 var plumber = require("gulp-plumber");
 
-gulp.task('compile-sass', function() {
-  return gulp.src(config.stylesheet.srcSass)
+gulp.task('compile-scss', function() {
+  return gulp.src(config.stylesheet.srcScss)
       .pipe(plumber())
-      .pipe(sass({ indentedSyntax: true, errLogToConsole: true }))
+      .pipe(sass({ style: 'expanded' }).on('error', sass.logError))
       .pipe(autoprefixer())
       .pipe(minifyCss())
       .pipe(rename({ suffix: '.bundle' }))
@@ -24,7 +24,7 @@ gulp.task('compile-image', function() {
 });
 
 // watch
-gulp.task('watch-sass', function() {
-    var watcher = gulp.watch('app/assets/**/*.scss', ['compile-sass']);
+gulp.task('watch-scss', function() {
+    var watcher = gulp.watch('app/assets/**/*.scss', ['compile-scss']);
     watcher.on('change', function(event) {});
 });
