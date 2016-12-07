@@ -18,13 +18,18 @@ class ::Service::Video::GetVideoInfo
     title = get_title(item)
     duration = get_duration(item)
     image_url = get_image_url(item)
+    embeddable = get_embeddable(item)
 
-    { title: title, duration: duration, image_url: image_url }
+    { title: title, duration: duration, image_url: image_url, embeddable: embeddable }
   end
 
   private
   def get_item(video)
     video["items"].first
+  end
+
+  def get_embeddable(item)
+    item["status"]["embeddable"]
   end
 
   def get_title(item)
@@ -34,18 +39,7 @@ class ::Service::Video::GetVideoInfo
   end
 
   def get_duration(item)
-    duration_text = item['contentDetails']['duration']
-    durations = duration_text.gsub('PT', '').gsub('S', '').split(/M|H/).map{|m| m.to_i}
-    if durations.length == 3
-      durations[0] * 60 * 60 + durations[1] * 60 + durations[2]
-    elsif durations.length == 2
-      durations[0] * 60  + durations[1]
-    elsif durations.length == 1
-      durations[0]
-    else
-      0
-    end
-
+    ActiveSupport::Duration.parse(item['contentDetails']['duration']).to_i
     rescue => e
       0
   end

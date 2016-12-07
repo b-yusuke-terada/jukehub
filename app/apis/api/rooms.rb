@@ -125,7 +125,11 @@ class API::Rooms < ::Grape::API
           v = uri.query.split('&').map{|m| m.split('=')}.select{|m| m[0] == 'v'}.first
           if v
             video_id = v[1]
+            begin
             res = Service::AddQueue.new({room: room, video_id: video_id, user_id: current_user.id}).execute
+            rescue => e
+              error!(e.message, 500)
+            end
           end
         end
 
