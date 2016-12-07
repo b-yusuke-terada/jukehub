@@ -52,7 +52,7 @@ div#main.show
           h5.urlTitle URL検索（YouTubeのみ）
           div.md-form
             input#url.form-control v-on:keydown.enter="add" value="#{@q}" type='text' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
-        div
+        div.scrollArea
           | <template v-for="queue in queues">
           |   <div class='card' v-if="queue.state == 0">
           |     <div class='card-block'>
