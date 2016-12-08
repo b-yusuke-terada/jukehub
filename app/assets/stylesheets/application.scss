@@ -92,7 +92,15 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
 .bg-primary {
     background: #111 !important;
 }
-
+.t_black {
+    span {
+        color: #000;
+        font-size: 22px;
+        &#search_query_title {
+            font-weight: bold;
+        }
+    }
+}
 //show
 body {
     color: #fff !important;
