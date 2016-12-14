@@ -5,17 +5,20 @@ var rename = require('gulp-rename');
 var rev  = require('gulp-rev');
 var minifyCss = require('gulp-minify-css');
 var autoprefixer = require("gulp-autoprefixer");
-var plumber = require("gulp-plumber");
+var plumber = require('gulp-plumber');
+var notify  = require('gulp-notify');
 
 gulp.task('compile-scss', function() {
   return gulp.src(config.stylesheet.srcScss)
-      .pipe(plumber())
-      .pipe(sass({ style: 'expanded' }).on('error', sass.logError))
-      .pipe(autoprefixer())
-      .pipe(minifyCss())
-      .pipe(rename({ suffix: '.bundle' }))
-      .pipe(gulp.dest(config.stylesheet.dest))
-      .pipe(gulp.dest(config.publicAssets));
+  .pipe(plumber({
+    errorHandler: notify.onError("Error: <%= error.message %>") //<-
+  }))
+  .pipe(sass({ style: 'expanded' }).on('error', sass.logError))
+  .pipe(autoprefixer())
+  .pipe(minifyCss())
+  .pipe(rename({ suffix: '.bundle' }))
+  .pipe(gulp.dest(config.stylesheet.dest))
+  .pipe(gulp.dest(config.publicAssets));
 });
 
 gulp.task('compile-image', function() {

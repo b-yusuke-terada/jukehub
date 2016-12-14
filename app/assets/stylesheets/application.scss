@@ -22,10 +22,7 @@ li {
 .lp-view {
     height: 100%;
     background: url("http://xn--sdkzbwcz77qkh2b.jp/sozai/jpg/crw_1507_jfr.jpg") no-repeat center center fixed;
-            background-size: cover;
-    -webkit-background-size: cover;
-       -moz-background-size: cover;
-         -o-background-size: cover;
+    background-size: cover;
 }
 
 .lp-description {
@@ -114,7 +111,7 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
 body {
     color: #fff !important;
     background: #000;
-    animation: bg-color 10s infinite;
+    // animation: bg-color 10s infinite;
 }
 .contents a {
     color: #ffd700 !important;
@@ -258,4 +255,21 @@ body {
 .likeCountArea {
     display: inline-block;
     text-align: center;
+}
+
+body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  overflow: hidden;
+}
+
+#canvasOverlay {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  background: #000;
+  width:100%;
+  height:100%;
 }

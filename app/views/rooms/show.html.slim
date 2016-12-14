@@ -22,7 +22,7 @@ div#main.show
                 = link_to 'JukeHubの使い方', "#{ENV["APP_HOSTNAME"]}/how_to_use", class: 'dropdown-item', target: '_blank'
                 = link_to '所属切替', "#{ENV["APP_HOSTNAME"]}/organizations", class: 'dropdown-item'
 
-
+  canvas#canvasOverlay
   div.container-fluid
     br
     div.row
@@ -282,6 +282,20 @@ javascript:
           },
         });
       },
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
     }
   })
   v.watch();
