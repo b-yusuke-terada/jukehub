@@ -64,11 +64,6 @@ $heightBox: 520px;
     }
 }
 
-
-// body {
-//   display: none;
-// }
-
 //common
 @keyframes bg-color {
     0% {
@@ -160,7 +155,8 @@ body {
         }
     }
     .fa {
-        font-size: 30px;
+        font-size: 35px;
+        opacity: 0.9;
     }
     .pull-xs-right {
         padding-right: 20px;
@@ -250,6 +246,18 @@ body {
     .list-group-item, .btn-secondary {
         color: #111 !important;
     }
+}
+
+.stm {
+  display: block;
+  padding-right: 10px;
+  .fa-stop-circle-o {
+    position: absolute;
+  right: -700%;
+  top: 10%;
+  }
+  .fa-stop-circle-o:before {
+  }
 }
 
 .likeCountArea {
