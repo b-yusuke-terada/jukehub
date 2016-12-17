@@ -1,5 +1,39 @@
 @charset "UTF-8";
 
+@mixin spacing($size) {
+  $type: 'p';
+  $prop: 'padding';
+  @for $i from 1 through 2 {
+    @if $i > 1 {
+      $type: 'm';
+      $prop: 'margin';
+    }
+    .#{$type}t#{$size} { #{$prop}-top:    #{$size}px !important; }
+    .#{$type}r#{$size} { #{$prop}-right:  #{$size}px !important; }
+    .#{$type}b#{$size} { #{$prop}-bottom: #{$size}px !important; }
+    .#{$type}l#{$size} { #{$prop}-left:   #{$size}px !important; }
+    .#{$type}v#{$size},
+    .#{$type}a#{$size} {
+      @extend .#{$type}t#{$size};
+      @extend .#{$type}b#{$size};
+    }
+    .#{$type}h#{$size},
+    .#{$type}a#{$size} {
+      @extend .#{$type}r#{$size};
+      @extend .#{$type}l#{$size};
+    }
+  }
+}
+
+@include spacing(0);
+@include spacing(10);
+@include spacing(20);
+@include spacing(30);
+@include spacing(40);
+
+.center {
+    text-align: center !important;
+}
 p {
     margin: 0;
 }
@@ -280,4 +314,63 @@ body {
   background: #000;
   width:100%;
   height:100%;
+}
+
+.howToUse {
+  background: #FFF;
+  color: #111;
+  counter-reset: titleNum;
+  .navbar-brand {
+    background: #FFF;
+  }
+  .navbar .navbar-nav .nav-item a {
+    padding-top: 11px;
+  }
+  h1 {
+    position: relative;
+    margin-bottom: 30px;
+    padding-bottom: .3em;
+    border-bottom: 4px solid #ccc;
+    font-size: 2.3rem;
+  }
+  h1::after {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    z-index: 2;
+    content: '';
+    width: 20%;
+    height: 4px;
+    background-color: #3498db;
+  }
+    h2 {
+        position: relative;
+        padding: .1em 0 .5em 1.5em;
+        border-bottom: 1px solid #ccc;
+        counter-increment: titleNum;
+        font-size: 24px;
+    }
+    h2::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: counter(titleNum);
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        background-color: #333;
+        border-radius: 100%;
+        color: #fff;
+        font-size: .9em;
+        text-align: center;
+    }
+    .howtoWrap {
+        width: 80%;
+        margin-left: 20px;
+    }
+}
+
+.show {
+    
+
 }
