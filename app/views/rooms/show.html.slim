@@ -22,7 +22,7 @@ div#main.show
                 = link_to 'JukeHubの使い方', "#{ENV["APP_HOSTNAME"]}/how_to_use", class: 'dropdown-item', target: '_blank'
                 = link_to '所属切替', "#{ENV["APP_HOSTNAME"]}/organizations", class: 'dropdown-item'
 
-
+  canvas#canvasOverlay
   div.container-fluid
     br
     div.row
@@ -66,10 +66,10 @@ div#main.show
           |             <div class='col-xs-14'>
           |               <h5 class='card-title'>{{queue.title}}</h5>
           |             </div>
-          |             <div class='col-xs-1'>
+          |             <div class='col-xs-1 stm'>
           |               <a id="{{queue.id}}" class="activator" v-on:click="stop"><i id="{{queue.id}}" class="fa fa-stop-circle-o"></i></a>
           |             </div>
-          |           <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration_text}}</p>
+          |           <p>{{queue.user.name}} / {{queue.duration_text}}</p>
           |           </div>
           |         </div>
           |       </div>
@@ -85,10 +85,10 @@ div#main.show
           |           <div class='col-xs-14'>
           |             <h5 class='card-title'>{{queue.title}}</h5>
           |           </div>
-          |           <div class='col-xs-1'>
+          |           <div class='col-xs-1 stm'>
           |             <a id="{{queue.id}}" class="activator" v-on:click="stop"><i id="{{queue.id}}" class="fa fa-stop-circle-o"></i></a>
           |           </div>
-          |           <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration_text}}</p>
+          |           <p>{{queue.user.name}} / {{queue.duration_text}}</p>
           |         </div>
           |       </div>
           |     </div>
