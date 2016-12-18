@@ -9,8 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.12.8",
-    "gulp-notify": "^2.2.0"
+    "browser-sync": "^2.12.8"
   },
   "dependencies": {
     "babel-loader": "^6.2.5",

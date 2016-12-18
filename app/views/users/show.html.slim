@@ -7,7 +7,7 @@ div
           div.col-lg-12
             img src="#{@user.image_url}" height="90%" width="90%"
           div.col-lg-12
-            h2.mt20 @#{@user.nickname}
+            h2 @#{@user.nickname}
           div.col-lg-12
             - @user.accounts.each do |account|
               - if account.provider_url

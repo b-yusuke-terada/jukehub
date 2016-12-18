@@ -1,39 +1,5 @@
 @charset "UTF-8";
 
-@mixin spacing($size) {
-  $type: 'p';
-  $prop: 'padding';
-  @for $i from 1 through 2 {
-    @if $i > 1 {
-      $type: 'm';
-      $prop: 'margin';
-    }
-    .#{$type}t#{$size} { #{$prop}-top:    #{$size}px !important; }
-    .#{$type}r#{$size} { #{$prop}-right:  #{$size}px !important; }
-    .#{$type}b#{$size} { #{$prop}-bottom: #{$size}px !important; }
-    .#{$type}l#{$size} { #{$prop}-left:   #{$size}px !important; }
-    .#{$type}v#{$size},
-    .#{$type}a#{$size} {
-      @extend .#{$type}t#{$size};
-      @extend .#{$type}b#{$size};
-    }
-    .#{$type}h#{$size},
-    .#{$type}a#{$size} {
-      @extend .#{$type}r#{$size};
-      @extend .#{$type}l#{$size};
-    }
-  }
-}
-
-@include spacing(0);
-@include spacing(10);
-@include spacing(20);
-@include spacing(30);
-@include spacing(40);
-
-.center {
-    text-align: center !important;
-}
 p {
     margin: 0;
 }
@@ -56,7 +22,10 @@ li {
 .lp-view {
     height: 100%;
     background: url("http://xn--sdkzbwcz77qkh2b.jp/sozai/jpg/crw_1507_jfr.jpg") no-repeat center center fixed;
-    background-size: cover;
+            background-size: cover;
+    -webkit-background-size: cover;
+       -moz-background-size: cover;
+         -o-background-size: cover;
 }
 
 .lp-description {
@@ -97,6 +66,11 @@ $heightBox: 520px;
         background: rgba(230, 230, 230, 0.4); 
     }
 }
+
+
+// body {
+//   display: none;
+// }
 
 //common
 @keyframes bg-color {
@@ -140,7 +114,7 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
 body {
     color: #fff !important;
     background: #000;
-    // animation: bg-color 10s infinite;
+    animation: bg-color 10s infinite;
 }
 .contents a {
     color: #ffd700 !important;
@@ -189,8 +163,7 @@ body {
         }
     }
     .fa {
-        font-size: 35px;
-        opacity: 0.9;
+        font-size: 30px;
     }
     .pull-xs-right {
         padding-right: 20px;
@@ -282,95 +255,7 @@ body {
     }
 }
 
-.stm {
-  display: block;
-  padding-right: 10px;
-  .fa-stop-circle-o {
-    position: absolute;
-  right: -700%;
-  top: 10%;
-  }
-  .fa-stop-circle-o:before {
-  }
-}
-
 .likeCountArea {
     display: inline-block;
     text-align: center;
-}
-
-body {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #000;
-  overflow: hidden;
-}
-
-#canvasOverlay {
-  position: fixed;
-  top: 50%;
-  left: 0;
-  background: #000;
-  width:100%;
-  height:100%;
-}
-
-.howToUse {
-  background: #FFF;
-  color: #111;
-  counter-reset: titleNum;
-  .navbar-brand {
-    background: #FFF;
-  }
-  .navbar .navbar-nav .nav-item a {
-    padding-top: 11px;
-  }
-  h1 {
-    position: relative;
-    margin-bottom: 30px;
-    padding-bottom: .3em;
-    border-bottom: 4px solid #ccc;
-    font-size: 2.3rem;
-  }
-  h1::after {
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    z-index: 2;
-    content: '';
-    width: 20%;
-    height: 4px;
-    background-color: #3498db;
-  }
-    h2 {
-        position: relative;
-        padding: .1em 0 .5em 1.5em;
-        border-bottom: 1px solid #ccc;
-        counter-increment: titleNum;
-        font-size: 24px;
-    }
-    h2::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: counter(titleNum);
-        width: 28px;
-        height: 28px;
-        line-height: 28px;
-        background-color: #333;
-        border-radius: 100%;
-        color: #fff;
-        font-size: .9em;
-        text-align: center;
-    }
-    .howtoWrap {
-        width: 80%;
-        margin-left: 20px;
-    }
-}
-
-.show {
-    
-
 }
