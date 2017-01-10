@@ -109,7 +109,12 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
 .bg-primary {
     background: #111 !important;
 }
-
+.t_black {
+    color: #000;
+}
+.bold {
+    font-weight: bold;
+}
 //show
 body {
     color: #fff !important;
