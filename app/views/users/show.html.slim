@@ -15,12 +15,6 @@ div
                   i class="fa fa-#{account.provider}"
               - else
                 i class="fa fa-#{account.provider}"
-          div.col-lg-12
-            h5.display-6 organizations
-            ul
-             - @user.organizations.each do |organization|
-               li = organization.screen_name
-
       div.col-lg-9
         div.row
           div.col-lg-6

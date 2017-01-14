@@ -1,5 +1,5 @@
 nav.navbar.navbar-dark.bg-primary
-  a.navbar-brand href="#{ENV["APP_HOSTNAME"]}" JukeHub
+  a.navbar-brand href="/" JukeHub
   button.navbar-toggler.hidden-md-up type="button" data-toggle="collapse" data-target="#collapse-bar" aria-expanded="true"
     i.fa.fa-bars
   div.container-fluid
@@ -9,8 +9,8 @@ nav.navbar.navbar-dark.bg-primary
           a.nav-link.dropdown-toggle.waves-effect.waves-light type="button" id="dropdown_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
             img.img-circle src="#{current_user.image_url}" height='24px'
           div.dropdown-menu.dropdown-right.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
-            = link_to 'マイページ', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
-            = link_to 'プロフィール編集', "#{ENV["APP_HOSTNAME"]}/settings/account", class: 'dropdown-item'
+            = link_to 'マイページ', "/users/#{current_user.id}", class: 'dropdown-item'
+            = link_to 'プロフィール編集', "/settings/account", class: 'dropdown-item'
             div.dropdown-divider
-            = link_to 'JukeHubの使い方', "#{ENV["APP_HOSTNAME"]}/how_to_use", class: 'dropdown-item', target: '_blank'
+            = link_to 'JukeHubの使い方', "/how_to_use", class: 'dropdown-item', target: '_blank'
 br
