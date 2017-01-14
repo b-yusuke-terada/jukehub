@@ -101,7 +101,6 @@ javascript:
     data: {
       search_results: [],
       queues: [],
-      comments: [],
       participants: [],
       now_playing: 0,
     },
@@ -217,36 +216,9 @@ javascript:
             }, 3 * 1000);
           }
           self.fetch_videos();
-          self.fetch_comments();
           setTimeout(function() {
             self.watch();
           }, 10 * 1000);
-        });
-      },
-      comment: function() {
-        var self = this;
-        var comment = $('#comment').val();
-        $.ajax({
-          type: 'POST',
-          url: '/api/rooms/#{@room.id}/comments',
-          data: { comment: comment },
-          success: function() {
-            $('#comment').val('');
-            self.fetch_comments();
-          }
-        });
-      },
-      fetch_comments: function() {
-        var self = this;
-        $.ajax({
-          type: 'GET',
-          url: '/api/rooms/#{@room.id}/comments',
-          success: function (data, status, request) {
-            self.comments = [];
-            for (var i = 0; i < data.length; i++) {
-              self.comments.push(data[i]);
-            }
-          },
         });
       },
       aho: function() {
