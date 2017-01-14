@@ -23,18 +23,6 @@ class API::Rooms < ::Grape::API
         @room
       end
 
-      resource :comments do
-        desc 'GET /api/rooms/:id/comments'
-        get do
-          @room.playing_queue.comments.map{|c| { user: c.user, body: c.body }}
-        end
-
-        desc 'POST /api/rooms/:id/comments'
-        post do
-          ::Service::AddComment.new({room: @room, comment: @params[:comment], user: current_user}).execute
-        end
-      end
-
       resource :participants do
         desc 'GET /api/rooms/:id/participants'
         get do
@@ -48,7 +36,7 @@ class API::Rooms < ::Grape::API
       resource :reactions do
         desc 'GET /api/rooms/:id/reactions'
         get do
-          { like: @room.playing_queue.reactions.length }
+          { like: @room.playing_queue ? @room.playing_queue.reactions.length : 0}
         end
 
         desc 'POST /api/rooms/:id/reactions'
