@@ -17,10 +17,10 @@ div#main.show
               a.nav-link.dropdown-toggle.waves-effect.waves-light type="button" id="dropdown_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
                 img.img-circle src="#{current_user.image_url}" height='24px'
               div.dropdown-menu.dropdown-right.dropdown-warning aria-labelledby="dropdown_menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut"
-                = link_to 'マイページ', "#{ENV["APP_HOSTNAME"]}/users/#{current_user.id}", class: 'dropdown-item'
+                = link_to 'マイページ', "/users/#{current_user.id}", class: 'dropdown-item'
                 div.dropdown-divider
-                = link_to 'JukeHubの使い方', "#{ENV["APP_HOSTNAME"]}/how_to_use", class: 'dropdown-item', target: '_blank'
-                = link_to '所属切替', "#{ENV["APP_HOSTNAME"]}/organizations", class: 'dropdown-item'
+                = link_to 'JukeHubの使い方', "/how_to_use", class: 'dropdown-item', target: '_blank'
+                = link_to '部屋から出る', "/rooms", class: 'dropdown-item'
 
 
   div.container-fluid

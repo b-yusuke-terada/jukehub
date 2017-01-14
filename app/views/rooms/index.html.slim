@@ -1,7 +1,13 @@
 div
   = render partial: "/layouts/navbar"
   div.contents.container-fluid
-    h1 #{@organization.screen_name}の部屋一覧
+    div.row
+      div.col-md-9
+        h1 部屋一覧
+      div.col-md-3
+        div.text-xs-right
+          a href="/rooms/new"
+            button.btn.btn-primary type="button" 新規作成
     table.table.table-bordered
       thead
         th 部屋名
@@ -12,4 +18,7 @@ div
           tr
             td = link_to room.screen_name, room
             td.text-xs-right = "#{room.current_participants.length}人"
-            td = room.playing_queue.video.title
+            - if room.playing_queue
+              td = room.playing_queue.video.title
+            - else
+              td 現在音楽は流れておりません

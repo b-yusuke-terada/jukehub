@@ -1,0 +1,16 @@
+div
+  = render partial: "/layouts/navbar"
+  div.contents.container
+    div.form-header.text-md-center
+      h3.display-4
+        i.fa.fa-user
+        |  部屋作成
+      hr.mt-2.md-2
+    = form_for @room do |f|
+      div.md-form
+        i.fa.fa-lock.prefix
+        = f.text_field :screen_name, autocomplete: "off", placeholder: 'ルーム名'
+      div.actions
+        = f.submit "作成", class: 'btn btn-success'
+      hr.mt-2.md-2
+      div.text-xs-right
