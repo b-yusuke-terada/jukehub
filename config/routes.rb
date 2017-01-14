@@ -10,12 +10,7 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  resources :rooms, only: [:index, :show]
-  resources :organizations, only: [:index, :show] do
-    member do
-      get :join,   to: 'organizations#join'
-    end
-  end
+  resources :rooms, only: [:index, :show, :new, :create]
   resources :users, only: [:show]
 
   namespace :settings do
