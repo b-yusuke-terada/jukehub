@@ -26,29 +26,6 @@ ActiveRecord::Schema.define(version: 20170114061555) do
     t.index ["screen_name"], name: "index_accounts_on_screen_name", using: :btree
   end
 
-  create_table "comment_reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "comment_id"
-    t.integer  "user_id"
-    t.integer  "reaction_type"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["comment_id"], name: "index_comment_reactions_on_comment_id", using: :btree
-    t.index ["reaction_type"], name: "index_comment_reactions_on_reaction_type", using: :btree
-    t.index ["user_id"], name: "index_comment_reactions_on_user_id", using: :btree
-  end
-
-  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "queue_id"
-    t.integer  "reference_comment_id"
-    t.integer  "user_id"
-    t.text     "body",                 limit: 65535
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.index ["queue_id"], name: "index_comments_on_queue_id", using: :btree
-    t.index ["reference_comment_id"], name: "index_comments_on_reference_comment_id", using: :btree
-    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
-  end
-
   create_table "oauth_access_grants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "resource_owner_id",               null: false
     t.integer  "application_id",                  null: false
@@ -89,30 +66,6 @@ ActiveRecord::Schema.define(version: 20170114061555) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
   end
 
-  create_table "organization_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "organization_id"
-    t.integer  "user_id"
-    t.integer  "state"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["organization_id"], name: "index_organization_users_on_organization_id", using: :btree
-    t.index ["state"], name: "index_organization_users_on_state", using: :btree
-    t.index ["user_id"], name: "index_organization_users_on_user_id", using: :btree
-  end
-
-  create_table "organizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.string   "screen_name"
-    t.text     "description", limit: 65535
-    t.boolean  "is_public",                 default: true
-    t.integer  "state",                     default: 0
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.index ["is_public"], name: "index_organizations_on_is_public", using: :btree
-    t.index ["name"], name: "index_organizations_on_name", using: :btree
-    t.index ["state"], name: "index_organizations_on_state", using: :btree
-  end
-
   create_table "queue_reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "queue_id"
     t.integer  "user_id"
@@ -122,19 +75,6 @@ ActiveRecord::Schema.define(version: 20170114061555) do
     t.index ["queue_id"], name: "index_queue_reactions_on_queue_id", using: :btree
     t.index ["reaction_type"], name: "index_queue_reactions_on_reaction_type", using: :btree
     t.index ["user_id"], name: "index_queue_reactions_on_user_id", using: :btree
-  end
-
-  create_table "reactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "queue_id"
-    t.integer  "reference_comment_id"
-    t.integer  "user_id"
-    t.integer  "reaction_type"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.index ["queue_id"], name: "index_reactions_on_queue_id", using: :btree
-    t.index ["reaction_type"], name: "index_reactions_on_reaction_type", using: :btree
-    t.index ["reference_comment_id"], name: "index_reactions_on_reference_comment_id", using: :btree
-    t.index ["user_id"], name: "index_reactions_on_user_id", using: :btree
   end
 
   create_table "room_participants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
