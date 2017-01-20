@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :queues, foreign_key: :user_id, class_name: 'RoomQueue'
   has_many :videos, through: :queues
 
+  has_many :bookmarks, foreign_key: :user_id, class_name: 'Bookmark'
+  has_many :bookmark_videos, through: :bookmarks, class_name: 'Video'
+
   has_many :reactions, foreign_key: 'user_id', class_name: '::QueueReaction'
 
   def email_required?

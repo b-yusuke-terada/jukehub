@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114061555) do
+ActiveRecord::Schema.define(version: 20170119135434) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20170114061555) do
     t.datetime "updated_at",  null: false
     t.index ["provider", "uid"], name: "index_accounts_on_provider_and_uid", unique: true, using: :btree
     t.index ["screen_name"], name: "index_accounts_on_screen_name", using: :btree
+  end
+
+  create_table "bookmarks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "video_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_bookmarks_on_user_id", using: :btree
+    t.index ["video_id"], name: "index_bookmarks_on_video_id", using: :btree
   end
 
   create_table "oauth_access_grants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -1,0 +1,25 @@
+div#bookmarks.modal.fade tabindex="-1" role="dialog" aria-labelledby="youtube_modal" aria-hidden="true"
+  div.modal-dialog role="document"
+    div.modal-content
+      div.modal-header
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4#modal_title.modal-title.t_black ブックマーク
+      div.modal-body
+        | <template v-for="bookmark in bookmarks">
+        |   <div class='card card-block'>
+        |     <div class='row'>
+        |       <div class='col-xs-2'>
+        |         <img v-bind:src='bookmark.image_url' height='100%' width='100%'>
+        |       </div>
+        |       <div class='col-xs-8'>
+        |         <h5 class='card-title'>{{bookmark.title}}</h4>
+        |       </div>
+        |       <div class='col-xs-2'>
+        |         <button id="{{bookmark.video_id}}" class="btn btn-floating btn-small blue" v-on:click="add_video_from_result">
+        |           <i class="fa fa-plus-circle" id="{{bookmark.video_id}}"></i>
+        |         </button>
+        |       </div>
+        |     </div>
+        |   </div>
+        | </template>
