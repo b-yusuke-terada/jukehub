@@ -20,6 +20,7 @@ class API::Root < Grape::API
     jukehub_authorize! :public
   end
 
+  mount API::Bookmarks
   mount API::Videos
   mount API::Rooms
   mount API::Users

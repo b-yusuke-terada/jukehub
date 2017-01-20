@@ -1,5 +1,6 @@
 div#main.show
   = render partial: "/rooms/youtube_search"
+  = render partial: "/rooms/bookmark_search"
   = render partial: "/rooms/error_modal"
   nav.navbar.navbar-dark.bg-primary
     span.bb
@@ -11,6 +12,7 @@ div#main.show
         ul.nav.navbar-nav
         div.form-inline.pull-md-left
           input#search_query.form-control v-on:keydown.enter="aho" type="text" size='50%' placeholder=" 検索"
+          button#search_from_bookmark.btn.btn-primary v-on:click="search_from_bookmark" ブックマークから検索
         div.profileIcon
           ul.nav.navbar-nav.nav-flex-icons
             li.nav-item.avatar.dropdown.active
@@ -39,15 +41,17 @@ div#main.show
             div.col-xs-2
               img#user_image src="/assets/images/user.png" height="90%" width="90%"
               span.iconH
-            div.col-xs-8
+            div.col-xs-7
               h4#now_playing_title.card-title
               a#now_playing_user
-            div.col-xs-2
+            div.col-xs-3
               span.likeCountArea
                 span#like_count 0
                 span いいね
-              button.btn.btn-floating.btn-small.gold v-on:click="like"
-                i.fa.fa-gratipay
+              button.btn.btn-floating.btn-small.btn-primary v-on:click="like"
+                i.fa.fa-thumbs-up
+              button.btn.btn-floating.btn-small.btn-success v-on:click="add_bookmark"
+                i.fa.fa-bookmark
       div.col-md-4
         div.card.card-block
           h5.urlTitle URL検索（YouTubeのみ）
@@ -100,6 +104,7 @@ javascript:
     el: '#main',
     data: {
       search_results: [],
+      bookmarks: [],
       queues: [],
       participants: [],
       now_playing: 0,
@@ -120,6 +125,17 @@ javascript:
             $('#error_modal').modal('show');
           },
         });
+      },
+      add_bookmark: function() {
+        console.log(this.now_playing);
+        var self = this;
+        $.ajax({
+          type: 'POST',
+          url: '/api/bookmarks',
+          data: { video_id: self.now_playing, },
+          success: function (data, status, request) {
+          },
+        }).error(function (data, status, request) {})
       },
       fetch_videos: function() {
         var self = this;
@@ -252,6 +268,21 @@ javascript:
           error: function() {
             $('#error_modal').modal('show');
           },
+        });
+      },
+      search_from_bookmark: function() {
+        var self = this;
+        $.ajax({
+          type: 'GET',
+          url: '/api/bookmarks',
+          success: function(data, status, req) {
+            self.bookmarks = [];
+            for (var i = 0; i < data.result.length; i++) {
+              console.log(data.result[i]);
+              self.bookmarks.push(data.result[i]);
+            }
+            $('#bookmarks').modal();
+          }
         });
       },
     }
