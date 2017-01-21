@@ -127,7 +127,6 @@ javascript:
         });
       },
       add_bookmark: function() {
-        console.log(this.now_playing);
         var self = this;
         $.ajax({
           type: 'POST',
@@ -135,7 +134,10 @@ javascript:
           data: { video_id: self.now_playing, },
           success: function (data, status, request) {
           },
-        }).error(function (data, status, request) {})
+          error: function(res) {
+            $('#error_modal').modal('show');
+          }
+        })
       },
       fetch_videos: function() {
         var self = this;
