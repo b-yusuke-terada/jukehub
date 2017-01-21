@@ -19,10 +19,11 @@ class API::Bookmarks < Grape::API
     desc 'GET /api/videos'
     post do
       video = Video.find_by({provider_video_id: params[:video_id]})
-      Bookmark.create({
-        user_id: current_user.id,
-        video_id: video.id,
-      })
+      if Bookmark.find_by({ user_id: current_user.id, video_id: video.id })
+        error!
+      else
+        Bookmark.create({ user_id: current_user.id, video_id: video.id })
+      end
     end
   end
 end
