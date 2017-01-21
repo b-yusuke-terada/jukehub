@@ -2,7 +2,7 @@ div#main.show
   = render partial: "/rooms/youtube_search"
   = render partial: "/rooms/bookmark_search"
   = render partial: "/rooms/error_modal"
-  nav.navbar.navbar-dark.bg-primary
+  nav.navbar.navbar-dark.bg-darkgray
     span.bb
     a.navbar-brand = @room.screen_name
     button.navbar-toggler.hidden-md-up type="button" data-toggle="collapse" data-target="#collapse-bar" aria-expanded="true"
@@ -11,8 +11,8 @@ div#main.show
       div#collapse-bar.collapse.navbar-toggleable-sm
         ul.nav.navbar-nav
         div.form-inline.pull-md-left
-          input#search_query.form-control v-on:keydown.enter="aho" type="text" size='50%' placeholder=" 検索"
-          button#search_from_bookmark.btn.btn-primary v-on:click="search_from_bookmark" ブックマークから検索
+          input#search_query.form-control v-on:keydown.enter="aho" type="text" size='50%' placeholder=" Youtube検索"
+          button#search_from_bookmark.btn.btn-darkgray v-on:click="search_from_bookmark" ブックマークから追加
         div.profileIcon
           ul.nav.navbar-nav.nav-flex-icons
             li.nav-item.avatar.dropdown.active
@@ -33,31 +33,30 @@ div#main.show
         div#participants.card.card-block.nopad
           | <template v-for="participant in participants">
           |   <img class="horizontal" v-bind:src='participant.image_url' height="30px" width="30px" data-toggle="tooltip" data-placement="top" title="{{participant.name}}">
-          |   <span class="iconR">
-          |   </span>
           | </template>
-        div.card.card-block
-          div.row
-            div.col-xs-2
-              img#user_image src="/assets/images/user.png" height="90%" width="90%"
-              span.iconH
-            div.col-xs-7
-              h4#now_playing_title.card-title
-              a#now_playing_user
-            div.col-xs-3
-              span.likeCountArea
-                span#like_count 0
-                span いいね
-              button.btn.btn-floating.btn-small.btn-primary v-on:click="like"
-                i.fa.fa-thumbs-up
-              button.btn.btn-floating.btn-small.btn-success v-on:click="add_bookmark"
-                i.fa.fa-bookmark
+        div.card
+          div.card-block
+            div.row
+              div.col-lg-12
+                h4#now_playing_title.card-title
+                div.video-action
+                  button.btn.btn-floating.btn-small.btn-darkgray v-on:click="like"
+                    i.fa.fa-thumbs-up
+                  button.btn.btn-floating.btn-small.btn-darkgray v-on:click="add_bookmark"
+                    i.fa.fa-bookmark
+            img#user_image src="/assets/images/user.png" height="48" width="48"
+            a#now_playing_user
+            div.like-info.text-xs-right
+              span#like_count 0
+              span
+                |  
+              span いいね
       div.col-md-4
         div.card.card-block
-          h5.urlTitle URL検索（YouTubeのみ）
+          h5.urlTitle URLから直接追加
           div.md-form
             input#url.form-control v-on:keydown.enter="add" value="#{@q}" type='text' placeholder="https://www.youtube.com/watch?v=ZWdMi2Cfp70"
-        div.scrollArea
+        div.scroller
           | <template v-for="queue in queues">
           |   <div class='card' v-if="queue.state == 0">
           |     <div class='card-block'>
@@ -67,11 +66,11 @@ div#main.show
           |         </div>
           |         <div class='col-xs-10'>
           |           <div class='row'>
-          |             <div class='col-xs-14'>
+          |             <div class='col-xs-11'>
           |               <h5 class='card-title'>{{queue.title}}</h5>
           |             </div>
           |             <div class='col-xs-1'>
-          |               <a id="{{queue.id}}" class="activator" v-on:click="stop"><i id="{{queue.id}}" class="fa fa-stop-circle-o"></i></a>
+          |               <a id="{{queue.id}}" class="activator" v-on:click="stop"><i id="{{queue.id}}" class="fa fa-ban"></i></a>
           |             </div>
           |           <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration_text}}</p>
           |           </div>
@@ -86,11 +85,11 @@ div#main.show
           |       </div>
           |       <div class='col-xs-10'>
           |         <div class="row">
-          |           <div class='col-xs-14'>
+          |           <div class='col-xs-11'>
           |             <h5 class='card-title'>{{queue.title}}</h5>
           |           </div>
           |           <div class='col-xs-1'>
-          |             <a id="{{queue.id}}" class="activator" v-on:click="stop"><i id="{{queue.id}}" class="fa fa-stop-circle-o"></i></a>
+          |             <a id="{{queue.id}}" class="activator" v-on:click="stop"><i id="{{queue.id}}" class="fa fa-ban"></i></a>
           |           </div>
           |           <p class='pull-xs-right'>{{queue.user.name}} / {{queue.duration_text}}</p>
           |         </div>
