@@ -12,6 +12,6 @@ html
     - if current_user
       javascript:
         $.ajaxSetup({headers: { 'Authorization': 'Bearer #{access_token}' } });
-  body
+  body.bg-darkgray
     = yield
     = render partial: "layouts/ga"

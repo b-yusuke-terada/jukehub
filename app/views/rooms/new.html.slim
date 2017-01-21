@@ -3,14 +3,14 @@ div
   div.contents.container
     div.form-header.text-md-center
       h3.display-4
-        i.fa.fa-user
+        i.fa.fa-pencil-square-o
         |  部屋作成
       hr.mt-2.md-2
     = form_for @room do |f|
       div.md-form
-        i.fa.fa-lock.prefix
-        = f.text_field :screen_name, autocomplete: "off", placeholder: 'ルーム名'
+        i.fa.fa-address-card-o.prefix
+        = f.text_field :screen_name, autocomplete: "off", placeholder: 'ルーム名', class: 'form-control'
       div.actions
-        = f.submit "作成", class: 'btn btn-success'
+        = f.submit "作成", class: 'btn btn-darkgray'
       hr.mt-2.md-2
       div.text-xs-right
