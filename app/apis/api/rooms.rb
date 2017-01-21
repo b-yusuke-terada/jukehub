@@ -65,7 +65,7 @@ class API::Rooms < ::Grape::API
             {
               id: q.id,
               image_url: q.video.image_url,
-              title: q.video.title,
+              title: q.video.title.length > 20 ? "#{q.video.title[0,20]} ..." : q.video.title,
               state: q.state,
               user: {
                 name: q.user ? q.user.nickname : 'JUKEHUB BOT',
