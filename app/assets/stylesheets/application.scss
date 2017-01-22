@@ -66,19 +66,21 @@ input.form-control:focus {
   background: #333;
 }
 
+.btn-white {
+  background: #fff;
+  color: #1a1a1a !important;
+}
+
+button.btn:hover {
+  background: #c00;
+  color: #fff !important;
+}
+
 .nopad {
   padding: 2px;
 }
 .card img.horizontal {
     display: inline;
-}
-.lp-view {
-    height: 100%;
-    background: url("http://xn--sdkzbwcz77qkh2b.jp/sozai/jpg/crw_1507_jfr.jpg") no-repeat center center fixed;
-            background-size: cover;
-    -webkit-background-size: cover;
-       -moz-background-size: cover;
-         -o-background-size: cover;
 }
 
 .lp-description {
