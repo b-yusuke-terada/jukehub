@@ -6,13 +6,10 @@ body {
   background: #141414;
 }
 
-p {
-  margin: 0;
-}
-
 li {
   color: #000;
 }
+
 .navbar div input {
   height: 1rem;
   margin: 0 5px 1px 8px;
@@ -20,10 +17,6 @@ li {
 
 .card {
   color: #000;
-}
-
-.font-30px {
-  font-size: 30px;
 }
 
 // Video Information
@@ -37,6 +30,7 @@ div.video-action {
   margin-top: -15px;
   right: 0;
   min-width: 100px;
+  font-size: 30px;
 }
 
 img#user_image {
@@ -54,10 +48,7 @@ div.like-info {
   min-width: 100px;
 }
 
-input.form-control {
-  color: #fff;
-}
-
+input.form-control,
 input.form-control:focus {
   color: #fff;
 }
@@ -79,21 +70,22 @@ button.btn:hover {
 .nopad {
   padding: 2px;
 }
+
 .card img.horizontal {
-    display: inline;
+  display: inline;
 }
 
 .lp-description {
-    padding-top: 10rem;
-    padding-right: 15rem;
-    padding-bottom: 15rem;
-    padding-left: 15rem;
-    color: #fff;
-    background-color: rgba(255,255,255,0.3);
+  padding-top: 10rem;
+  padding-right: 15rem;
+  padding-bottom: 15rem;
+  padding-left: 15rem;
+  color: #fff;
+  background-color: rgba(255,255,255,0.3);
 }
 
 .height250 {
-    height: 250px;
+  height: 250px;
 }
 
 .scroller {
@@ -110,12 +102,16 @@ button.btn:hover {
 }
 
 input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=search-md]:focus:not([readonly]), input[type=search]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=url]:focus:not([readonly]), textarea.md-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #b8860b;
-    box-shadow: 0 1px 0 0 #b8860b;
+  border-bottom: 1px solid #b8860b;
+  box-shadow: 0 1px 0 0 #b8860b;
 }
 
 .bg-darkgray {
   background: #111;
+}
+
+.bg-darkgray a {
+  color: #fff;
 }
 
 .bg-darkgray > .navbar-brand {
@@ -130,7 +126,7 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
 }
 
 .contents a {
-    color: #ffd700 !important;
+  color: #ffd700 !important;
 }
 
 .show {
