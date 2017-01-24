@@ -129,12 +129,6 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
   color: #ffd700 !important;
 }
 
-//トップページ
-.index {
-  .lp-description {
-  }
-}
-
 //動画ページ
 .show {
     .navbar div input {
@@ -236,7 +230,7 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
   h1 {
     margin-bottom: 30px;
   }
-  h3 {
+  h2 {
     margin-top: 20px;
     margin-bottom: 20px;
     padding-bottom: 10px;
