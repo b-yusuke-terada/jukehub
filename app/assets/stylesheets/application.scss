@@ -245,3 +245,8 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
     font-size: 2em;
   }
 }
+
+.under-line {
+  padding-bottom: .4em;
+  border-bottom: 1px solid #ccc;
+}
