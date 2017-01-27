@@ -98,7 +98,11 @@ button.btn:hover {
 }
 
 .dropdown-right {
-    left: -200%;
+  left: -200%;
+}
+
+.dropdown-toggle::after {
+  color: #555; 
 }
 
 input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=search-md]:focus:not([readonly]), input[type=search]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=url]:focus:not([readonly]), textarea.md-textarea:focus:not([readonly]) {
@@ -129,6 +133,7 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
   color: #ffd700 !important;
 }
 
+//動画ページ
 .show {
     .navbar div input {
         height: 1.5rem;
@@ -218,4 +223,34 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
 .likeCountArea {
     display: inline-block;
     text-align: center;
+}
+
+.how-to-use {
+  color: #000;
+  background: #FFF;
+  a {
+    color: #000;
+  }
+  h1 {
+    margin-bottom: 30px;
+  }
+  h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+  }
+  .step {
+    padding-bottom: .5em;
+    border-bottom: 1px solid #ccc;
+  }
+  .step:first-letter {
+    margin-right: .1em;
+    font-size: 2em;
+  }
+}
+
+.under-line {
+  padding-bottom: .4em;
+  border-bottom: 1px solid #ccc;
 }

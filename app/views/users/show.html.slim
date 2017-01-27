@@ -18,7 +18,7 @@ div
       div.col-lg-9
         div.row
           div.col-lg-6
-            h3 最近流した曲
+            h3.under-line 最近流した曲
             - @user.queues.where(state: [1, 2]).order('id DESC').limit(5).each do |queue|
               div.media
                 a.media-left.waves-light
@@ -30,7 +30,7 @@ div
                     br
                     | #{queue.reactions.length} いいね
           div.col-lg-6
-            h3 最近いいねをした曲
+            h3.under-line 最近いいねをした曲
             - @user.reactions.order('id DESC').limit(5).each do |reaction|
               div.media
                 a.media-left.waves-light
