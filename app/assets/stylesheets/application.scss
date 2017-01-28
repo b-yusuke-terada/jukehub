@@ -264,6 +264,7 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
     text-align: center;
 }
 
+//howto
 .how-to-use {
   color: #000;
   background: #FFF;
@@ -275,7 +276,7 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
   }
   h2 {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     padding-bottom: 10px;
     border-bottom: 2px solid #ccc;
   }
@@ -287,9 +288,15 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
     margin-right: .1em;
     font-size: 2em;
   }
+  .detail {
+    padding: 10px;
+    background: #ccc;
+  }
 }
 
 .under-line {
   padding-bottom: .4em;
   border-bottom: 1px solid #ccc;
 }
+
+
