@@ -130,8 +130,47 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
 }
 
 .contents a {
-  color: #ffd700 !important;
+  color: #ffd700;
 }
+
+.contents {
+  a {
+    &.list-group-item {
+      margin: 10px 0;
+      border: none;
+      color: #000;
+      &.active {
+        background: #f5f5f5;
+        color: #000;
+        &:hover {
+          background: #f5f5f5;
+          a {
+            color: #000;
+          }
+        }
+      }
+      &:hover {
+        background: #f5f5f5;
+        a {
+          color: #000;
+        }
+      }
+      a {
+        color: #000;
+      }
+    }
+  }
+  li.list-group-item,h5.card-header {
+    background: #333;
+    font-size: 1.25rem;
+    border: none;
+    color: #fff;
+  }
+  h5.card-header {
+    padding: 17px;
+  }
+}
+
 
 //動画ページ
 .show {
