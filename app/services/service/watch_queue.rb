@@ -12,6 +12,8 @@ class ::Service::WatchQueue
   end
 
   def execute
+    return unless @room.participants.recently.length > 0
+
     queue = @room.playing_queue
     if !queue
       if next_queue = @room.next_queue

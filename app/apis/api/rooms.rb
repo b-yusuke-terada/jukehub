@@ -27,7 +27,7 @@ class API::Rooms < ::Grape::API
         desc 'GET /api/rooms/:id/participants'
         get do
           ::Service::AddParticipant.new({room: @room, user: current_user}).execute
-          @room.participants.where('updated_at > ?', Time.now - 300).map{|m|
+          @room.participants.recently.map{|m|
             { name: m.user.nickname, image_url: m.user.image_url }
           }
         end
