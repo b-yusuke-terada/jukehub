@@ -171,8 +171,21 @@ input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([re
   }
 }
 
+//index {
+.main-title {
+  font-size: 30px;
+}
+h4.card-title {
+  background: #CCC;
+  padding: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+p.card-text {
+  font-size: 15px;
+}
 
-//動画ページ
+//show
 .show {
     .navbar div input {
         height: 1.5rem;
