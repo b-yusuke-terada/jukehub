@@ -306,6 +306,31 @@ p.card-text {
     background: #ccc;
   }
 }
+.how-to-title {
+  position: relative;
+  padding: .25em 0 .5em .75em;
+  border-left: 6px solid #ccc;
+  font-size: 21px;
+}
+.how-to-title::before {
+  position: absolute;
+  left: -6px;
+  bottom: 0;
+  content: '';
+  width: 6px;
+  height: 50%;
+  margin-bottom: 12px;
+  background-color: #000;
+}
+.how-to-title::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: '';
+  width: 100%;
+  height: 0;
+  border-bottom: 1px solid #ccc;
+}
 
 .under-line {
   padding-bottom: .4em;
